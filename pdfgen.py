@@ -58,6 +58,11 @@ def slugify(text, delim=u'-'):
 
 
 if __name__ == "__main__":
+    # build path and pdf container dir if not exists
+    home = os.path.dirname(os.path.abspath(__file__))
+    asset_dir = os.path.join(home, "assets")
+    if not os.path.exists(asset_dir):
+        os.makedirs(asset_dir)
     # build list of titles
     titles = ["2001 ford taurus automatic transmission wiring schematic"]
     # loop through list of bunch setem
@@ -67,5 +72,7 @@ if __name__ == "__main__":
         # generate the pdf file
         subprocess.call(["pdflatex", "output.tex"])
         # move the pdf into separate folder
-        subprocess.call(["mv", "output.pdf", slugify(unicode(title)) + ".pdf"])
+        fname = "%s.pdf" % slugify(unicode(title))
+        fpath = os.path.join(asset_dir, fname)
+        subprocess.call(["mv", "output.pdf", fpath])
 
