@@ -5,3 +5,4 @@ local/
 *~
 *.aux
 *.log
+*.out
