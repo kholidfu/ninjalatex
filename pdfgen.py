@@ -1,6 +1,6 @@
 import os
 from jinja2 import Environment, FileSystemLoader
-
+import hashlib
 
 """
 source: http://pythonadventures.wordpress.com/2014/02/25/jinja2-example-for-generating-a-local-file-using-a-template/
@@ -29,8 +29,10 @@ def create_tex():
     fname = "output.tex"
     # variables we will use in template
     title = "2001 ford taurus automatic transmission wiring schematic"
+    # generate unique id for each book
+    uid = hashlib.md5(title).hexdigest()
     # context is the container of our data
-    context = {"title": title}
+    context = {"title": title, "uid":uid}
 
     # write to the file
     with open(fname, "w") as f:
@@ -39,4 +41,8 @@ def create_tex():
 
 
 if __name__ == "__main__":
+    # loop through list of bunch setem
+    # generate the tex file
+    # generate the pdf file
+    # move the pdf into separate folder
     create_tex()
