@@ -3,6 +3,8 @@ from jinja2 import Environment, FileSystemLoader
 
 
 """
+source: http://pythonadventures.wordpress.com/2014/02/25/jinja2-example-for-generating-a-local-file-using-a-template/
+
 1. create .tex template
 2. put some variables in it
 3. generate each .tex file
