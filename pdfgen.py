@@ -64,7 +64,14 @@ if __name__ == "__main__":
     if not os.path.exists(asset_dir):
         os.makedirs(asset_dir)
     # build list of titles
-    titles = ["2001 ford taurus automatic transmission wiring schematic"]
+    titles = [
+        "2001 ford taurus automatic transmission wiring schematic",
+        "2001 pontiac grand am wiring diagrams",
+        "2002 ford explorer o2 wiring",
+        "2002 honda accord ac compressor wiring diagram",
+        "2003 dodge ram ignition switch wiring diagram",
+        "2004 ford f250 super duty wiring schematic",
+    ]
     # loop through list of bunch setem
     for title in titles:
         # generate the tex file
