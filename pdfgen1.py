@@ -1,6 +1,16 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 
+
+"""
+1. create .tex template
+2. put some variables in it
+3. generate each .tex file
+4. convert it to pdf with pdftolatex
+5. done!
+"""
+
+
 PATH = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_ENVIRONMENT = Environment(
     autoescape=False,
