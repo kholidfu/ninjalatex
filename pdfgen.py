@@ -28,11 +28,11 @@ def create_tex():
     # output/generated file
     fname = "output.tex"
     # variables we will use in template
-    urls = ["example.com", "example.net", "example.co.id"]
-    context = {
-        "urls": urls
-        }
+    title = "2001 ford taurus automatic transmission wiring schematic"
+    # context is the container of our data
+    context = {"title": title}
 
+    # write to the file
     with open(fname, "w") as f:
         html = render_template("index.tex", context)
         f.write(html)

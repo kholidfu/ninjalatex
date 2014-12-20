@@ -1,10 +1,94 @@
-\documentclass[a4paper, 12pt]{article}
+\documentclass{book}
+
+% preambule
+% needed package
+
+% custom header footer layout settings
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \rhead{}
+    \lhead{}
+    \rfoot{}
+    \lfoot{}
+    \cfoot{}
+% remove horizontal line from fancyhdr
+\renewcommand{\headrulewidth}{0pt}
+
+% custom paper size
+\usepackage[paperheight=233mm, paperwidth=178mm, top=1in,bottom=1in,right=1in,left=1in]{geometry}
+
+\usepackage{color} % <= font color
+
+% custom command <= creating bold horizontal rules
+    \newcommand{\myline}
+    {
+        \begin{center}
+            \(\star\ \star\ \star\ \star\ \star\ \star\ \star\ \star\)
+        \end{center}
+    }
+    
+    \newcommand{\HRule}{\rule{\linewidth}{2mm}}
+    \newcommand{\garis}{\rule{\linewidth}{0.5mm}}
+%%
+
+
 \begin{document}
-\section{Bab I}
-Ini isi dari bab I
-\begin{enumerate}
-{% for url in urls %}
-\item{ {{ url }} }
-{% endfor %}
-\end{enumerate}
+
+% bagian title start
+\begin{titlepage}
+
+\begin{flushright}
+\textcolor{white}{hidden text}
+
+\vspace{7cm}
+
+\HRule \\[0.4cm]
+{\large {{ title|title }} }\\[0.4cm]
+\HRule \\[1.5cm]
+
+\large{\emph Author:}\\
+\small{ Kholid Fuadi }
+
+\end{flushright}
+
+\vfill
+
+\begin{flushright}
+\footnotesize{ For your convenience, we has placed some of the front \\
+matter material after the index. Please use the Bookmarks \\
+and Contents at a Glance links to access them. }
+\end{flushright}
+
+\end{titlepage}
+% bagian title end
+\noindent
+{\textbf {\footnotesize {{ title|title }} }}
+
+\vspace{6pt}
+
+\noindent
+\scriptsize{Copyright @2014. All rights reserved. \\Printed in the United
+  States of America.}
+
+\noindent
+\scriptsize{This books may be purchased for educational, business or
+  sales promotional use. Online editions are also available for most
+  titles. For more information, please contact our
+  corporate/institutional sales department.}
+
+\vfill
+
+\noindent
+\scriptsize{Many of the designations used by manufacture and sellers
+  to distinguish their products are claimed as trademarks. Where those
+  designations appear in this book, and we was aware of a trademark
+  claim, the designations have been printed in caps or initial caps.}
+
+\noindent
+\scriptsize{While every precautions has been taken in the preparation of
+  this book, the publisher and author assume no responsibility for
+  errors or omissions, or for damage resulting from the use of the
+  information contained herein.}
+
+
 \end{document}
