@@ -9,3 +9,4 @@ assets/
 *.out
 *.png
 *.pdf
+output.tex
