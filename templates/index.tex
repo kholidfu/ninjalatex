@@ -3,6 +3,14 @@
 % preambule
 % needed package
 
+% cover coloring
+\usepackage{xcolor}
+%\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+\definecolor{titlepagecolor}{cmyk}{ {{ colors }} }
+
+% image
+\usepackage{graphicx}
+
 % url need this
 \usepackage[hidelinks=true]{hyperref}
 
@@ -30,7 +38,7 @@
         \end{center}
     }
     
-    \newcommand{\HRule}{\rule{\linewidth}{2mm}}
+    \newcommand{\HRule}{\rule{\linewidth}{1mm}}
     \newcommand{\garis}{\rule{\linewidth}{0.5mm}}
 %%
 
@@ -40,17 +48,23 @@
 % bagian title start
 \begin{titlepage}
 
+% coloring the cover
+\pagecolor{titlepagecolor}
+% font color set to white
+\color{white}
+
 \begin{flushright}
-\textcolor{white}{hidden text}
+\textcolor{white}{ }
 
 \vspace{7cm}
 
 \HRule \\[0.4cm]
-{\large {{ title|title }} }\\[0.4cm]
-\HRule \\[1.5cm]
+{\large {{ title|upper }} }\\[0.4cm]
+\HRule \\[2.5cm]
 
-\large{File ID:}\\
-\small{ {{ title[:3] }}-{{ uid[:11] }} }
+% \large{File ID}\\
+\includegraphics[height=18mm]{book-icon.png} \\[2mm]
+\scriptsize{ {{ title[:3] }}-{{ uid[:11] }} }
 
 \end{flushright}
 
@@ -64,6 +78,9 @@ and Contents at a Glance links to access them. }
 
 \end{titlepage}
 % bagian title end
+
+\nopagecolor % restore to white page background color
+
 \noindent
 {\textbf {\footnotesize {{ title|title }} }}
 
@@ -111,7 +128,7 @@ purpose of this eBook is to educate and inform about {{ title }}.
 
 \begin{flushleft}
 With an overwhelming emphasis on practical, real-world case presented
-in a terse,to-the-point format, this {{ title }} will serve as an
+in a terse, to-the-point format, this {{ title }} will serve as an
 ideal resource for those looking to familiarize themselves with the 
 {{ title }}.
 \end{flushleft}

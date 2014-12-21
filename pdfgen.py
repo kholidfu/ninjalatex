@@ -3,6 +3,8 @@ from jinja2 import Environment, FileSystemLoader
 import hashlib
 import subprocess
 from unidecode import unidecode
+import sys
+import random
 
 
 """
@@ -34,10 +36,12 @@ def create_tex(title):
     fname = "output.tex"
     # variables we will use in template
     # title = "2001 ford taurus automatic transmission wiring schematic"
-    # generate unique id for each book
-    uid = hashlib.md5(title).hexdigest()
+    # generate unique id for each book (mimic isbn)
+    uid = hashlib.md5(title).hexdigest().upper()
+    # generate random color for cover needs
+    colors = ",".join([str(random.random())[:4] for i in range(4)])
     # context is the container of our data
-    context = {"title": title, "uid":uid}
+    context = {"title": title, "uid":uid, "colors": colors}
 
     # write to the file
     with open(fname, "w") as f:
@@ -64,14 +68,9 @@ if __name__ == "__main__":
     if not os.path.exists(asset_dir):
         os.makedirs(asset_dir)
     # build list of titles
-    titles = [
-        "2001 ford taurus automatic transmission wiring schematic",
-        "2001 pontiac grand am wiring diagrams",
-        "2002 ford explorer o2 wiring",
-        "2002 honda accord ac compressor wiring diagram",
-        "2003 dodge ram ignition switch wiring diagram",
-        "2004 ford f250 super duty wiring schematic",
-    ]
+    fsource = sys.argv[1]
+    with open(fsource) as f:
+        titles = [title.strip() for title in f.readlines()][:100]
     # loop through list of bunch setem
     for title in titles:
         # generate the tex file
