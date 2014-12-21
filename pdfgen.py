@@ -70,13 +70,13 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()][:100]
+        titles = [title.strip() for title in f.readlines()][:2]
     # loop through list of bunch setem
     for title in titles:
         # generate the tex file
         create_tex(title)
         # generate the pdf file
-        subprocess.call(["pdflatex", "output.tex"])
+        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
         # move the pdf into separate folder
         fname = "%s.pdf" % slugify(unicode(title))
         fpath = os.path.join(asset_dir, fname)

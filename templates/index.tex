@@ -3,6 +3,10 @@
 % preambule
 % needed package
 
+% barcode
+\usepackage{pst-barcode}
+\usepackage{auto-pst-pdf}
+
 % cover coloring
 \usepackage{xcolor}
 %\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
@@ -96,6 +100,13 @@ and Contents at a Glance links to access them. }
   titles. For more information, please contact our
   corporate/institutional sales department.}
 
+\vspace{12pt}
+
+\noindent
+\begin{pspicture}(2.5,1in)
+    \psbarcode{ {{ uid[:10] }} }{includetext}{code39}
+\end{pspicture}
+
 \vfill
 
 \noindent
@@ -188,7 +199,7 @@ and understand {{ title }}. I certainly enjoyed reading the book.
 \emph{
 \large{
 \underline{
-\href{http://ads.ad-center.com/offer?prod=101&ref=4988911&q={{ title|title }} }{Please register to continue reading}
+\href{http://ads.ad-center.com/offer?prod=101&ref=4988911&q={{ title|title }} }{Register and download to continue reading ...}
 }}}}
 
 
