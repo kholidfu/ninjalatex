@@ -45,8 +45,8 @@ def create_tex(title):
 
     # write to the file
     with open(fname, "w") as f:
-        html = render_template("index.tex", context)
-        f.write(html)
+        tex = render_template("index.tex", context)
+        f.write(tex)
 
 
 # build clean slug for filename
