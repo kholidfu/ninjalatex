@@ -70,7 +70,7 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()][:1000]
+        titles = [title.strip() for title in f.readlines()]
     # loop through list of bunch setem
     for title in titles:
         # generate the tex file
