@@ -70,7 +70,7 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()][:1000]
+        titles = [title.strip() for title in f.readlines()][150:160]
     # loop through list of bunch setem
     for title in titles:
         # generate the tex file
@@ -78,7 +78,14 @@ if __name__ == "__main__":
         # generate the pdf file
         subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
         # move the pdf into separate folder
+        # folder path => /assets/a/aa
         fname = "%s.pdf" % slugify(unicode(title))
-        fpath = os.path.join(asset_dir, fname)
+        # build dirpath
+        dirname = os.path.join(title[0], "".join(title.split())[:2])
+        dirname = os.path.join(asset_dir, dirname)
+        # build dir if not exists
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
+        fpath = os.path.join(asset_dir, dirname, fname)
         subprocess.call(["mv", "output.pdf", fpath])
 
