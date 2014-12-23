@@ -35,7 +35,6 @@ def render_template(template_filename, context):
 template_collection = ["index.tex", "index2.tex"]
 
 
-
 def create_tex(template, title):
     # output/generated file
     fname = "output.tex"
@@ -45,8 +44,11 @@ def create_tex(template, title):
     uid = hashlib.md5(title).hexdigest().upper()
     # generate random color for cover needs
     colors = ",".join([str(random.random())[:4] for i in range(4)])
+    # keywords for pdf metada
+    keywords = ",".join(["read online", "ebook"] + title.split() + ["free", "download"])
     # context is the container of our data
-    context = {"title": title, "uid":uid, "colors": colors}
+    context = {"title": title, "uid":uid, "colors": colors, 
+               "keywords": keywords}
     # write to the file
     with open(fname, "w") as f:
         tex = render_template(template, context)
@@ -86,9 +88,9 @@ if __name__ == "__main__":
         # generate the tex file
         create_tex(choosen_template, title)
         # generate the pdf file
-        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-        subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-                        stdout=FNULL, stderr=subprocess.STDOUT)
+        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+        #subprocess.call(["pdflatex", "--shell-escape", "output.textex"], 
+        #                stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
         # folder path => /assets/a/aa
         fname = "%s.pdf" % slugify(unicode(title))

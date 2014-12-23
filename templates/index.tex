@@ -3,6 +3,14 @@
 % preambule
 % needed package
 
+% set pdf title metadata
+\usepackage[pdftex,
+  pdfauthor={ Joan De PDF },
+  pdftitle={ {{ title|upper }} },
+  pdfsubject={ {{ title }} },
+  pdfkeywords={ {{ keywords }} },
+  hidelinks=true]{hyperref}
+
 % barcode
 \usepackage{pst-barcode}
 \usepackage{auto-pst-pdf}
@@ -16,7 +24,7 @@
 \usepackage{graphicx}
 
 % url need this
-\usepackage[hidelinks=true]{hyperref}
+% \usepackage[hidelinks=true]{hyperref}
 
 % custom header footer layout settings
 \usepackage{fancyhdr}
@@ -68,7 +76,7 @@
 
 % \large{File ID}\\
 \includegraphics[height=18mm]{book-icon.png} \\[2mm]
-\scriptsize{ {{ title[:3] }}-{{ uid[:11] }} }
+\scriptsize{ {{ title[:3]|upper }}-{{ uid[:11] }} }
 
 \end{flushright}
 
@@ -152,7 +160,7 @@ and Contents at a Glance links to access them. }
 
 \begin{flushright}
 \scriptsize{
-  \texttt{ {{ title|title }} \\ {{ title[:3] }}-{{ uid[:10] }} }
+  \texttt{ {{ title|title }} \\ {{ title[:3]|upper }}-{{ uid[:10] }} }
 }
 \end{flushright}
 
