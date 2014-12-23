@@ -89,7 +89,7 @@ if __name__ == "__main__":
         create_tex(choosen_template, title)
         # generate the pdf file
         # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-        subprocess.call(["pdflatex", "--shell-escape", "output.textex"], 
+        subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
                         stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
         # folder path => /assets/a/aa
