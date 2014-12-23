@@ -70,13 +70,18 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()]
+        titles = [title.strip() for title in f.readlines()][:2]
     # loop through list of bunch setem
+    # supress the subprocess output
+    FNULL = open(os.devnull, 'w')
+    count = 1
     for title in titles:
+        print "%s. generating pdf for: %s" % (count, title)
         # generate the tex file
         create_tex(title)
         # generate the pdf file
-        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+        subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+                        stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
         # folder path => /assets/a/aa
         fname = "%s.pdf" % slugify(unicode(title))
@@ -88,4 +93,6 @@ if __name__ == "__main__":
             os.makedirs(dirname)
         fpath = os.path.join(asset_dir, dirname, fname)
         subprocess.call(["mv", "output.pdf", fpath])
-
+        count += 1
+        print "sukses"
+    FNULL.close()
