@@ -31,7 +31,12 @@ def render_template(template_filename, context):
     return TEMPLATE_ENVIRONMENT.get_template(template_filename).render(context)
 
 
-def create_tex(title):
+# randomize template
+template_collection = ["index.tex", "index2.tex"]
+
+
+
+def create_tex(template, title):
     # output/generated file
     fname = "output.tex"
     # variables we will use in template
@@ -42,10 +47,9 @@ def create_tex(title):
     colors = ",".join([str(random.random())[:4] for i in range(4)])
     # context is the container of our data
     context = {"title": title, "uid":uid, "colors": colors}
-
     # write to the file
     with open(fname, "w") as f:
-        tex = render_template("index.tex", context)
+        tex = render_template(template, context)
         f.write(tex)
 
 
@@ -70,16 +74,19 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()]
+        titles = [title.strip() for title in f.readlines()][:100]
     # loop through list of bunch setem
     # supress the subprocess output
     FNULL = open(os.devnull, 'w')
     count = 1
     for title in titles:
         print "%s. generating pdf for: %s" % (count, title)
+        # choose randomed template
+        choosen_template = random.choice(template_collection)
         # generate the tex file
-        create_tex(title)
+        create_tex(choosen_template, title)
         # generate the pdf file
+        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
         subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
                         stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
