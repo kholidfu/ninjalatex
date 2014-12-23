@@ -88,9 +88,9 @@ if __name__ == "__main__":
         # generate the tex file
         create_tex(choosen_template, title)
         # generate the pdf file
-        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-        #subprocess.call(["pdflatex", "--shell-escape", "output.textex"], 
-        #                stdout=FNULL, stderr=subprocess.STDOUT)
+        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+        subprocess.call(["pdflatex", "--shell-escape", "output.textex"], 
+                        stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
         # folder path => /assets/a/aa
         fname = "%s.pdf" % slugify(unicode(title))
