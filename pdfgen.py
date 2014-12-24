@@ -83,6 +83,8 @@ if __name__ == "__main__":
     count = 1
     for title in titles:
         print "%s. generating pdf for: %s" % (count, title)
+        print "=="
+        print sys.argv[1]
         # choose randomed template
         choosen_template = random.choice(template_collection)
         # generate the tex file
