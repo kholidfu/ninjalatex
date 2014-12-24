@@ -83,16 +83,15 @@ if __name__ == "__main__":
     count = 1
     for title in titles:
         print "%s. generating pdf for: %s" % (count, title)
-        print "=="
         print sys.argv[1]
         # choose randomed template
         choosen_template = random.choice(template_collection)
         # generate the tex file
         create_tex(choosen_template, title)
         # generate the pdf file
-        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-        subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-                        stdout=FNULL, stderr=subprocess.STDOUT)
+        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+        #                 stdout=FNULL, stderr=subprocess.STDOUT)
         # move the pdf into separate folder
         # folder path => /assets/a/aa
         fname = "%s.pdf" % slugify(unicode(title))
@@ -106,4 +105,5 @@ if __name__ == "__main__":
         subprocess.call(["mv", "output.pdf", fpath])
         count += 1
         print "sukses"
+        print "======================================================="
     FNULL.close()
