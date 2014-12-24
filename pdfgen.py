@@ -76,7 +76,7 @@ if __name__ == "__main__":
     # build list of titles
     fsource = sys.argv[1]
     with open(fsource) as f:
-        titles = [title.strip() for title in f.readlines()]
+        titles = [title.strip() for title in f.readlines()][4690:]
     # loop through list of bunch setem
     # supress the subprocess output
     FNULL = open(os.devnull, 'w')
