@@ -104,9 +104,9 @@ if __name__ == "__main__":
                 os.makedirs(dirname)
                 fpath = os.path.join(asset_dir, dirname, fname)
                 subprocess.call(["mv", "output.pdf", fpath])
-                count += 1
-                print "sukses"
-                print "======================================================="
+            count += 1
+            print "sukses"
+            print "======================================================="
         else:
             # prevent processing empty line
             print "baris kosong bang"
