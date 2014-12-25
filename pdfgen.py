@@ -82,28 +82,32 @@ if __name__ == "__main__":
     FNULL = open(os.devnull, 'w')
     count = 1
     for title in titles:
-        print "%s. generating pdf for: %s" % (count, title)
-        print sys.argv[1]
-        # choose randomed template
-        choosen_template = random.choice(template_collection)
-        # generate the tex file
-        create_tex(choosen_template, title)
-        # generate the pdf file
-        subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-        # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-        #                 stdout=FNULL, stderr=subprocess.STDOUT)
-        # move the pdf into separate folder
-        # folder path => /assets/a/aa
-        fname = "%s.pdf" % slugify(unicode(title))
-        # build dirpath
-        dirname = os.path.join(title[0], "".join(title.split())[:2])
-        dirname = os.path.join(asset_dir, dirname)
-        # build dir if not exists
-        if not os.path.exists(dirname):
-            os.makedirs(dirname)
-        fpath = os.path.join(asset_dir, dirname, fname)
-        subprocess.call(["mv", "output.pdf", fpath])
-        count += 1
-        print "sukses"
-        print "======================================================="
+        if title:
+            print "%s. generating pdf for: %s" % (count, title)
+            print sys.argv[1]
+            # choose randomed template
+            choosen_template = random.choice(template_collection)
+            # generate the tex file
+            create_tex(choosen_template, title)
+            # generate the pdf file
+            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+            subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+                            stdout=FNULL, stderr=subprocess.STDOUT)
+            # move the pdf into separate folder
+            # folder path => /assets/a/aa
+            fname = "%s.pdf" % slugify(unicode(title))
+            # build dirpath
+            dirname = os.path.join(title[0], "".join(title.split())[:2])
+            dirname = os.path.join(asset_dir, dirname)
+            # build dir if not exists
+            if not os.path.exists(dirname):
+                os.makedirs(dirname)
+                fpath = os.path.join(asset_dir, dirname, fname)
+                subprocess.call(["mv", "output.pdf", fpath])
+                count += 1
+                print "sukses"
+                print "======================================================="
+        else:
+            # prevent processing empty line
+            print "baris kosong bang"
     FNULL.close()
