@@ -11,7 +11,7 @@ built beautiful pdf file with latex type-setting
 How to Use:
 -----------
 
-Clone and install
+#### Clone and install
 
 1. ``git clone https://github.com/sopier/ninjalatex``
 2. ``cd ninjalatex``
@@ -19,14 +19,14 @@ Clone and install
 4. ``. bin/activate``
 5. ``pip install -r requirements.txt``
 
-Usage
+#### Usage
 
 ``python pdfgen.py path/to/your/setem.txt``
 
-Note
+#### Note
 
 setem.txt example:
 
-wiring diagram satu
-dua wiring diagram
-wiring tiga diagram
+``wiring diagram satu``
+``dua wiring diagram``
+``wiring tiga diagram``
