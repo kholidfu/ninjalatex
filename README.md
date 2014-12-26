@@ -15,7 +15,7 @@ How to Use:
 
 You MUST have texlive installed in your Ubuntu, the package is quite huge, ~800Mb.
 
-``sudo apt-get install texlive texlive-base``
+``sudo apt-get install texlive texlive-base texlive-latex-extra``
 
 #### Clone and install
 
