@@ -5,6 +5,7 @@ import subprocess
 from unidecode import unidecode
 import sys
 import random
+import logging
 
 
 """
@@ -16,6 +17,9 @@ source: http://pythonadventures.wordpress.com/2014/02/25/jinja2-example-for-gene
 4. convert it to pdf with pdftolatex
 5. done!
 """
+
+# logging conf
+logging.basicConfig(filename="build.log", level=logging.DEBUG, format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 
 
 # load the templates dir
@@ -83,8 +87,10 @@ if __name__ == "__main__":
     count = 1
     for title in titles:
         if title:
-            print "%s. generating pdf for: %s" % (count, title)
-            print sys.argv[1]
+            # print "%s. generating pdf for: %s" % (count, title)
+            logging.info("%s. generating pdf for: %s" % (count, title))
+            # print sys.argv[1]
+            logging.info(sys.argv[1])
             # choose randomed template
             choosen_template = random.choice(template_collection)
             # generate the tex file
@@ -105,9 +111,12 @@ if __name__ == "__main__":
                 fpath = os.path.join(asset_dir, dirname, fname)
                 subprocess.call(["mv", "output.pdf", fpath])
             count += 1
-            print "sukses"
-            print "======================================================="
+            # print "sukses"
+            logging.info("sukses")
+            # print "======================================================="
+            logging.info("==================================================")
         else:
             # prevent processing empty line
-            print "baris kosong bang"
+            # print "baris kosong bang"
+            logging.warning("baris kosong bang")
     FNULL.close()
