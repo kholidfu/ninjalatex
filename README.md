@@ -11,6 +11,12 @@ built beautiful pdf file with latex type-setting
 How to Use:
 -----------
 
+#### Dependencies
+
+You MUST have texlive installed in your Ubuntu, the package is quite huge, ~800Mb.
+
+``sudo apt-get install texlive texlive-base``
+
 #### Clone and install
 
 1. ``git clone https://github.com/sopier/ninjalatex``
