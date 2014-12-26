@@ -28,5 +28,7 @@ How to Use:
 setem.txt example:
 
 ``wiring diagram satu``
+
 ``dua wiring diagram``
+
 ``wiring tiga diagram``
