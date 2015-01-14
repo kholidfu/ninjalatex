@@ -2,4 +2,5 @@ Jinja2==2.7.3
 MarkupSafe==0.23
 Unidecode==0.04.17
 argparse==1.2.1
+pymongo==2.7.2
 wsgiref==0.1.2

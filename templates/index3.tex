@@ -1,0 +1,264 @@
+\documentclass{article}
+
+% preambule
+% needed package
+
+% set pdf title metadata
+\usepackage[pdftex,
+  pdfauthor={ Joan De PDF },
+  pdftitle={ {{ title|upper }} },
+  pdfsubject={ {{ title }} },
+  pdfkeywords={ {{ keywords }} },
+  hidelinks=true]{hyperref}
+
+% barcode
+\usepackage{pst-barcode}
+\usepackage{auto-pst-pdf}
+
+% cover coloring
+\usepackage{xcolor}
+%\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+\definecolor{titlepagecolor}{cmyk}{ {{ colors }} }
+
+% image
+\usepackage{graphicx}
+
+% url need this
+% \usepackage[hidelinks=true]{hyperref}
+
+% custom header footer layout settings
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \rhead{}
+    \lhead{}
+    \rfoot{}
+    \lfoot{}
+    \cfoot{}
+% remove horizontal line from fancyhdr
+\renewcommand{\headrulewidth}{0pt}
+
+% custom paper size
+\usepackage[paperheight=233mm, paperwidth=178mm, top=1in,bottom=1in,right=1in,left=1in]{geometry}
+
+\usepackage{color} % <= font color
+
+% custom command <= creating bold horizontal rules
+    \newcommand{\myline}
+    {
+        \begin{center}
+            \(\star\ \star\ \star\ \star\ \star\ \star\ \star\ \star\)
+        \end{center}
+    }
+    
+    \newcommand{\HRule}{\rule{\linewidth}{1mm}}
+    \newcommand{\garis}{\rule{\linewidth}{0.5mm}}
+%%
+
+
+\begin{document}
+
+% bagian title start
+\begin{titlepage}
+
+% coloring the cover
+\pagecolor{titlepagecolor}
+% font color set to white
+\color{white}
+
+\begin{flushright}
+\textcolor{white}{ }
+
+\vspace{7cm}
+
+\HRule \\[0.4cm]
+{\large {{ title|upper }} }\\[0.4cm]
+\HRule \\[2.5cm]
+
+% \large{File ID}\\
+\includegraphics[height=18mm]{book-icon.png} \\[2mm]
+\scriptsize{ {{ title[:3]|upper }}-{{ uid[:11] }} }
+
+\end{flushright}
+
+\vfill
+
+\begin{flushright}
+\footnotesize{ For your convenience, we has placed some of the front \\
+matter material after the index. Please use the Bookmarks \\
+and Contents at a Glance links to access them. }
+\end{flushright}
+
+\end{titlepage}
+% bagian title end
+
+\nopagecolor % restore to white page background color
+
+\noindent
+{\textbf {\footnotesize {{ title|title }} }}
+
+\vspace{6pt}
+
+\noindent
+\scriptsize{Copyright @2014. All rights reserved. \\Printed in the United
+  States of America.}
+
+\noindent
+\scriptsize{This books may be purchased for educational, business or
+  sales promotional use. Online editions are also available for most
+  titles. For more information, please contact our
+  corporate/institutional sales department.}
+
+\vspace{12pt}
+
+\noindent
+\begin{pspicture}(2.5,1in)
+    \psbarcode{ {{ uid[:10] }} }{includetext}{code39}
+\end{pspicture}
+
+\vfill
+
+\noindent
+\scriptsize{Many of the designations used by manufacturers and sellers
+  to distinguish their products are claimed as trademarks. Where those
+  designations appear in this book, and we was aware of a trademark
+  claim, the designations have been printed in caps or initial caps.}
+
+\vspace{10pt}
+
+\noindent
+\scriptsize{While every precautions has been taken in the preparation of
+  this book, the publisher and author assume no responsibility for
+  errors or omissions, or for damage resulting from the use of the
+  information contained herein.}
+
+\vspace{10pt}
+
+\noindent
+\scriptsize{The illustrations, technical information, data and
+  descriptive text in this issue, to the best of our knowledge, were
+  correct at the time of going to print. The right to make changes at
+  any time, without notice, is reserved as part of continuous
+  development and improvement.
+}
+
+\vspace{10pt}
+
+\noindent
+\scriptsize{No liability can be accepted for any inaccuracies or
+  omissions in this publication, although every possible care has been
+  taken to make it as complete and accurate as possible.}
+
+\vspace{10pt}
+
+\noindent
+\scriptsize{No part of this publication may be reproduced, stored in a
+  retrieval system or transmitted in any form, electronic, mechanical,
+  photocopying, recording, translating or by other means without prior
+  written permission.}
+
+\vspace{15pt}
+
+\begin{flushright}
+\scriptsize{
+  \texttt{ {{ title|title }} \\ {{ title[:3]|upper }}-{{ uid[:10] }} }
+}
+\end{flushright}
+
+\clearpage
+
+%% halaman 2
+
+\section*{SPUN}
+
+{\normalsize
+  {{ content }}
+  % {{ content2 }} <= jejer
+}
+
+\clearpage
+
+{{ tags }}
+
+\clearpage
+
+\noindent
+\begin{center}
+{\normalsize \emph{This page intentionally left blank}}
+\end{center}
+
+\clearpage
+
+\section*{Preface}
+{\normalsize
+\begin{flushleft}
+\emph{Congratulations!} You are now reading \textbf{ {{ title }} }. The
+purpose of this eBook is to educate and inform about {{ title }}.
+\end{flushleft}
+
+\begin{flushleft}
+With an overwhelming emphasis on practical, real-world case presented
+in a terse, to-the-point format, this {{ title }} will serve as an
+ideal resource for those looking to familiarize themselves with the 
+{{ title }}.
+\end{flushleft}
+
+\begin{flushleft}
+What's pleased me the most about this book is the significant
+attention to detail from the author to the inner workings of the
+library. You can be safe knowing that the resouce that you have before
+you is one of the best thought-out and researched pieces of literature
+on the {{ title }}.
+\end{flushleft}
+
+\begin{flushleft}
+With resources like this book, I hope you will begin your exploration
+more on the {{ title }}.
+\end{flushleft}
+}
+
+\clearpage
+
+\section*{Praise for the First Edition}
+
+{\emph
+{\normalsize
+\begin{quote}
+This is an excellent work, a worthy successor to others. It is highly
+readable and chock-full of working explanation. Five stars all round!
+\end{quote}
+\begin{quote}
+I highly recommend the book for learning the fundamentals of 
+{{ title }} and then serving as a good reference book as you leverage the
+power more and more in your daily need.
+\end{quote}
+\begin{quote}
+It works and makes for a very readable book that you can just breeze
+through very quickly and pick up and retain a lot of information.
+\end{quote}
+\begin{quote}
+Thanks to the authors, the picture and explanation throughout the book
+are relevant, and make the point effectively.
+\end{quote}
+\begin{quote}
+An 8 out 10! If you want to learn {{ title }} then this is an
+excellent book ...
+\end{quote}
+\begin{quote}
+I think that {{ title }} is an excellent book that will help you learn
+and understand {{ title }}. I certainly enjoyed reading the book.
+\end{quote}
+}
+}
+
+\vspace{20pt}
+
+\noindent
+{\color{blue}
+\emph{
+\large{
+\underline{
+\href{http://www.seepdf.com/download/{{ title|title }} }{Register and download to continue reading ...}
+}}}}
+
+
+\end{document}
