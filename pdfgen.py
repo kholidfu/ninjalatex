@@ -77,12 +77,12 @@ def spin(content):
 
 
 def create_tex(template, title):
-    # databse call
+    # database call
     db = c["terms"]
     tags = db.command('text', 'term', search=title, limit=10)
     tags = [tag['obj'] for tag in tags['results']]
-    # tags = "\n\n".join(tag['term'] for tag in tags)
-    tags = "\n\n".join(["satu", "dua", "tiga"])
+    tags = "\n\n".join(tag['term'] for tag in tags)
+    # tags = "\n\n".join(["satu", "dua", "tiga"])
     # output/generated file
     fname = "output.tex"
     # variables we will use in template
@@ -204,8 +204,6 @@ def slugify(text, delim=u'-'):
     return unicode(delim.join(result))
 
 
-
-
 if __name__ == "__main__":
     # build path and pdf container dir if not exists
     home = os.path.dirname(os.path.abspath(__file__))
@@ -229,9 +227,9 @@ if __name__ == "__main__":
             # generate the tex file
             create_tex(choosen_template, title)
             # generate the pdf file
-            subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-            #                 stdout=FNULL, stderr=subprocess.STDOUT)
+            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+            subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+                            stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
             fname = "%s.pdf" % slugify(unicode(title))
