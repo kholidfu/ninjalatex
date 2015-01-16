@@ -15,6 +15,17 @@
 \usepackage{pst-barcode}
 \usepackage{auto-pst-pdf}
 
+% bibliography
+\usepackage{biblatex}
+
+% hypersetup
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
 % cover coloring
 \usepackage{xcolor}
 %\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
@@ -171,13 +182,20 @@ and Contents at a Glance links to access them. }
 \section*{SPUN}
 
 {\normalsize
-  {{ content|safe }}
+  blabla.\cite{satu}
+
+  {{ content|safe }} 
   % {{ content2 }} <= jejer
 }
 
 \clearpage
 
-{{ tags }}
+\begin{thebibliography}{99}
+
+\bibitem{satu}
+\emph{ {{ prewords[0] }} }, \href{http://www.google.com}{Google}, 1994.
+
+\end{thebibliography}
 
 \clearpage
 

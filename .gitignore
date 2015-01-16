@@ -9,5 +9,12 @@ assets/
 *.out
 *.png
 *.pdf
-output.tex
+*.tex
 setem.txt
+*.html
+*.bbl
+*.bcf
+*.bib
+*.blg
+*.xml
+*edit

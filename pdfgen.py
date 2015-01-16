@@ -46,6 +46,7 @@ def render_template(template_filename, context):
 # randomize template
 # template_collection = ["index.tex", "index2.tex"]
 template_collection = ["index3.tex"]
+# template_collection = ["index3.tex", "index4.tex"]
 
 
 def spin(content):
@@ -81,6 +82,7 @@ def create_tex(template, title):
     db = c["terms"]
     tags = db.command('text', 'term', search=title, limit=10)
     tags = [tag['obj'] for tag in tags['results']]
+    prewords = [tag['term'] for tag in tags]
     tags = "\n\n".join(tag['term'] for tag in tags)
     # tags = "\n\n".join(["satu", "dua", "tiga"])
     # output/generated file
@@ -115,7 +117,7 @@ digital|digital camera|a digital]
 today|currently available|on the market|on the market today|now
 available].
 
-[04|04|2008|apr] \\textbf{%s} [Civic|Social]
+\\textbf{%s} \\cite{%s}. [Civic|Social]
 [Hybrid|Crossbreed|Cross|A mix of both|Hybrid car]
 [Service|Support|Program|Assistance|Services]
 [Repair|Restore|Fix|Restoration|Mend] [Manual|Guide|Handbook|Guide
@@ -158,7 +160,7 @@ well as|and also|along with|in addition to] [on|upon|about|in|with]
 [any|any kind of|virtually any|just about any|almost any]
 [device|gadget|system|unit|product].
 
-\\textbf{%s} [This page|This site|These pages] [provides an|has
+\\textbf{%s}. [This page|This site|These pages] [provides an|has
 an|offers an] [indexed|listed|found] [list of|listing of|set of|report
 on|directory] [digital|electronic|electronic digital|digital camera|a
 digital] [ebooks|e-books|information products|electronic books|books]
@@ -180,12 +182,15 @@ products|electronic books|books] [related with|related to]
 [Service|Support|Program|Assistance|Services]
 [Repair|Restore|Fix|Restoration|Mend] [Manual|Guide|Handbook|Guide
 book|Information] [Pdf|Pdf file].
-    """ % (title, title)
+    """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
     content = spin(content)
+    # lempar string
+    loopex = "{% for i in range(10) %}{{ i }}\n{% endfor %}"
+    loopex = "maxi"
     # context is the container of our data
     context = {"title": title, "uid":uid, "colors": colors, 
                "keywords": keywords, "content": content, 
-               "tags": tags}
+               "tags": tags, "prewords": prewords}
     # write to the file
     with open(fname, "w") as f:
         tex = render_template(template, context)
@@ -227,9 +232,9 @@ if __name__ == "__main__":
             # generate the tex file
             create_tex(choosen_template, title)
             # generate the pdf file
-            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-            subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-                            stdout=FNULL, stderr=subprocess.STDOUT)
+            subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+            #                stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
             fname = "%s.pdf" % slugify(unicode(title))
