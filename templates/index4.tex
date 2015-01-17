@@ -69,25 +69,30 @@
 % bagian title start
 \begin{titlepage}
 
+\newgeometry{left=2cm} % defines the geometry for the titlepage
+
 % coloring the cover
 \pagecolor{titlepagecolor}
 % font color set to white
 \color{white}
 
-\begin{flushright}
 \textcolor{white}{ }
 
-\vspace{7cm}
+\vspace{2cm}
 
-\HRule \\[0.4cm]
-{\large {{ title|upper }} }\\[0.4cm]
-\HRule \\[2.5cm]
+\noindent
+\includegraphics[height=18mm]{book-icon.png} \\
+\makebox[0pt][l]{\rule{1.3\textwidth}{1pt}}
+\par
+\setlength{\parindent}{-.4em}
+\textbf{\textsf{ {{ title|upper }} }}
+\vfill
+\noindent
+{\huge \textsf{Handbook 1.3}}
+\vskip\baselineskip
+\noindent
+\textsf{August 2014}
 
-% \large{File ID}\\
-\includegraphics[height=18mm]{book-icon.png} \\[2mm]
-\scriptsize{ {{ title[:3]|upper }}-{{ uid[:11] }} }
-
-\end{flushright}
 
 \vfill
 
@@ -100,6 +105,8 @@ and Contents at a Glance links to access them. }
 \end{titlepage}
 % bagian title end
 
+% reset
+\restoregeometry % restores the geometry
 \nopagecolor % restore to white page background color
 
 \noindent
@@ -192,7 +199,8 @@ and Contents at a Glance links to access them. }
 
 \bibitem{satu}
 \emph{
-{{prewords[1]}}}, \href{http://www.google.com}{Click to read}, 1994.
+{{ prewords[1] }}}, \href{http://www.google.com}{Click to read}, 1994.
+
 \end{thebibliography}
 
 \clearpage

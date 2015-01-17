@@ -9,7 +9,7 @@ assets/
 *.out
 *.png
 *.pdf
-*.tex
+output.tex
 setem.txt
 *.html
 *.bbl

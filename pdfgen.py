@@ -44,9 +44,7 @@ def render_template(template_filename, context):
 
 
 # randomize template
-# template_collection = ["index.tex", "index2.tex"]
-template_collection = ["index3.tex"]
-# template_collection = ["index3.tex", "index4.tex"]
+template_collection = ["index3.tex", "index4.tex"]
 
 
 def spin(content):
