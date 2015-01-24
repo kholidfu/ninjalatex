@@ -10,7 +10,7 @@ import pymongo
 
 
 """
-source: http://pythonadventures.wordpress.com/2014/02/25/jinja2-example-for-generating-a-local-file-using-a-template/
+credit: http://pythonadventures.wordpress.com/2014/02/25/jinja2-example-for-generating-a-local-file-using-a-template/
 
 1. create .tex template
 2. put some variables in it
@@ -44,8 +44,9 @@ def render_template(template_filename, context):
 
 
 # randomize template
-template_collection = ["index.tex", "index2.tex"]
-# template_collection = ["index3.tex", "index4.tex"]  # hanan+maxi
+# template_collection = ["index.tex", "index2.tex"]  # <= wiring + auto templates
+# template_collection = ["index3.tex", "index4.tex"]  # <= hanan+maxi
+template_collection = ["index5.tex"]  # <= general + database connected
 
 
 def spin(content):
@@ -78,10 +79,15 @@ def spin(content):
 
 def create_tex(template, title):
     # database call
-    db = c["terms"]
-    tags = db.command('text', 'term', search=title, limit=10)
+    dbterms = c["terms"]
+    dbpdfs = c["pdfs"]
+    tags = dbterms.command('text', 'term', search=title, limit=10)
     tags = [tag['obj'] for tag in tags['results']]
-    prewords = [tag['term'] for tag in tags]
+    prewords = [tag['term'] for tag in tags]  # related title from database
+    # calling pdfs
+    snippets = dbpdfs.command("text", "pdf", search=title, limit=10)
+    snippets = [snippet['obj'] for snippet in snippets['results']]
+    snippets = [slugify(unidecode(snippet['snippet'])).replace("-", " ") for snippet in snippets]  # related snippet from dbase
     tags = "\n\n".join(tag['term'] for tag in tags)
     # tags = "\n\n".join(["satu", "dua", "tiga"])
     # output/generated file
@@ -183,13 +189,11 @@ products|electronic books|books] [related with|related to]
 book|Information] [Pdf|Pdf file].
     """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
     content = spin(content)
-    # lempar string
-    loopex = "{% for i in range(10) %}{{ i }}\n{% endfor %}"
-    loopex = "maxi"
+
     # context is the container of our data
     context = {"title": title, "uid":uid, "colors": colors, 
                "keywords": keywords, "content": content, 
-               "tags": tags, "prewords": prewords}
+               "tags": tags, "prewords": prewords, "snippets": snippets}
     # write to the file
     with open(fname, "w") as f:
         tex = render_template(template, context)
@@ -209,9 +213,15 @@ def slugify(text, delim=u'-'):
 
 
 if __name__ == "__main__":
+    """
+    usage:
+    python pdfgen.py setem.txt assets1
+    setem.txt <= source setem
+    assets1   <= destination folder to prevent collision
+    """
     # build path and pdf container dir if not exists
     home = os.path.dirname(os.path.abspath(__file__))
-    asset_dir = os.path.join(home, "assets")
+    asset_dir = os.path.join(home, sys.argv[2])  # dibikin flexible dari cmd
     if not os.path.exists(asset_dir):
         os.makedirs(asset_dir)
     # build list of titles
@@ -243,8 +253,8 @@ if __name__ == "__main__":
             # build dir if not exists
             if not os.path.exists(dirname):
                 os.makedirs(dirname)
-                fpath = os.path.join(asset_dir, dirname, fname)
-                subprocess.call(["mv", "output.pdf", fpath])
+            fpath = os.path.join(asset_dir, dirname, fname)
+            subprocess.call(["mv", "output.pdf", fpath])
             count += 1
             logging.info("sukses")
             logging.info("==================================================")
