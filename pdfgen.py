@@ -81,11 +81,11 @@ def create_tex(template, title):
     # database call
     dbterms = c["terms"]
     dbpdfs = c["pdfs"]
-    tags = dbterms.command('text', 'term', search=title, limit=10)
+    tags = dbterms.command('text', 'term', search=title, limit=50)
     tags = [tag['obj'] for tag in tags['results']]
     prewords = [tag['term'] for tag in tags]  # related title from database
     # calling pdfs
-    snippets = dbpdfs.command("text", "pdf", search=title, limit=10)
+    snippets = dbpdfs.command("text", "pdf", search=title, limit=50)
     snippets = [snippet['obj'] for snippet in snippets['results']]
     snippets = [slugify(unidecode(snippet['snippet'])).replace("-", " ") for snippet in snippets]  # related snippet from dbase
     tags = "\n\n".join(tag['term'] for tag in tags)
