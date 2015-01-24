@@ -15,7 +15,6 @@ def file_mover(top_folder_name):
     move the file
     """
     base_dir = os.path.join(os.getcwd(), "assets", top_folder_name)
-    dir = []
 
     for i in os.listdir(base_dir):  # h
         if os.path.isdir(os.path.join(base_dir, i)):
