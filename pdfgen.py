@@ -44,7 +44,8 @@ def render_template(template_filename, context):
 
 
 # randomize template
-template_collection = ["index3.tex", "index4.tex"]
+template_collection = ["index.tex", "index2.tex"]
+# template_collection = ["index3.tex", "index4.tex"]  # hanan+maxi
 
 
 def spin(content):
@@ -237,8 +238,8 @@ if __name__ == "__main__":
             # folder path => /assets/a/aa
             fname = "%s.pdf" % slugify(unicode(title))
             # build dirpath
-            dirname = os.path.join(title[0], "".join(title.split())[:2])
-            dirname = os.path.join(asset_dir, dirname)
+            # dirname = os.path.join(title[0], "".join(title.split())[:2])
+            dirname = os.path.join(asset_dir, title[0])  # lgsg 1 dir saja
             # build dir if not exists
             if not os.path.exists(dirname):
                 os.makedirs(dirname)
