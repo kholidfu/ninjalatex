@@ -13,9 +13,11 @@ How to Use:
 
 #### Dependencies
 
-You MUST have texlive installed in your Ubuntu, the package is quite huge, ~800Mb.
+You MUST have texlive installed in your Ubuntu, the package is quite
+huge, ~900Mb.
 
-``sudo apt-get install texlive texlive-base texlive-latex-extra``
+``sudo apt-get install texlive texlive-base texlive-latex-extra
+texlive-pstricks``
 
 #### Clone and install
 
