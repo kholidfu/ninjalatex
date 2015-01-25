@@ -7,6 +7,7 @@ import sys
 import random
 import logging
 import pymongo
+import re
 
 
 """
@@ -28,19 +29,40 @@ logging.basicConfig(filename="build.log", level=logging.DEBUG,
                     datefmt="%m/%d/%Y %I:%M:%S %p")
 
 
+# latex escaper
+LATEX_SUBS = (
+    (re.compile(r'\\'), r'\\textbackslash'),
+    (re.compile(r'([{}_#%&$])'), r'\\\1'),
+    (re.compile(r'~'), r'\~{}'),
+    (re.compile(r'\^'), r'\^{}'),
+    (re.compile(r'"'), r"''"),
+    (re.compile(r'\.\.\.+'), r'\\ldots'),
+)
+
+def escape_tex(value):
+    newval = value
+    for pattern, replacement in LATEX_SUBS:
+        newval = pattern.sub(replacement, newval)
+    return newval
+
+
 # load the templates dir
 PATH = os.path.dirname(os.path.abspath(__file__))
-TEMPLATE_ENVIRONMENT = Environment(
+env = Environment(
     autoescape=True,
     loader=FileSystemLoader(os.path.join(PATH, 'templates')),
     trim_blocks=False,
+    variable_start_string = '(((',
+    variable_end_string = ')))',
     # extensions=["jinja2.ext.autoescape"],
 )
 
+# custom filter for latex
+env.filters['escape_tex'] = escape_tex
 
 # ready to render
 def render_template(template_filename, context):
-    return TEMPLATE_ENVIRONMENT.get_template(template_filename).render(context)
+    return env.get_template(template_filename).render(context)
 
 
 # randomize template
@@ -87,6 +109,9 @@ def create_tex(template, title):
     # calling pdfs
     snippets = dbpdfs.command("text", "pdf", search=title, limit=50)
     snippets = [snippet['obj'] for snippet in snippets['results']]
+    # pake slugify biar bersih dari non char
+    # which may conflict with latex
+    # escape_tex can be used too though
     snippets = [slugify(unidecode(snippet['snippet'])).replace("-", " ") for snippet in snippets]  # related snippet from dbase
     tags = "\n\n".join(tag['term'] for tag in tags)
     # tags = "\n\n".join(["satu", "dua", "tiga"])
@@ -190,10 +215,14 @@ book|Information] [Pdf|Pdf file].
     """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
     content = spin(content)
 
+    # construct landing page url ambil dari prewords
+    lander = ["http://www.seepdf.com/download/%s" % w.title().strip() for w in prewords]
+
     # context is the container of our data
-    context = {"title": title, "uid":uid, "colors": colors, 
-               "keywords": keywords, "content": content, 
-               "tags": tags, "prewords": prewords, "snippets": snippets}
+    context = {"title": title, "uid":uid, "colors": colors,
+               "keywords": keywords, "content": content, "tags": tags,
+               "prewords": prewords, "snippets": snippets, "lander":
+               lander}
     # write to the file
     with open(fname, "w") as f:
         tex = render_template(template, context)

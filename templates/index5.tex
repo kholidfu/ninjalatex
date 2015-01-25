@@ -18,7 +18,7 @@
 % cover coloring
 \usepackage{xcolor}
 %\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
-\definecolor{titlepagecolor}{cmyk}{ {{ colors }} }
+\definecolor{titlepagecolor}{cmyk}{((( colors )))}
 
 % image
 \usepackage{graphicx}
@@ -79,12 +79,12 @@
 \vspace{7cm}
 
 \HRule \\[0.4cm]
-{\large {{ title|upper }} }\\[0.4cm]
+{\large ((( title|upper ))) }\\[0.4cm]
 \HRule \\[2.5cm]
 
 % \large{File ID}\\
 \includegraphics[height=18mm]{book-icon.png} \\[2mm]
-\scriptsize{ {{ title[:3]|upper }}-{{ uid[:11] }} }
+\scriptsize{ ((( title[:3]|upper )))-((( uid[:11] ))) }
 
 \end{flushright}
 
@@ -102,7 +102,7 @@ and Contents at a Glance links to access them. }
 \nopagecolor % restore to white page background color
 
 \noindent
-{\textbf {\footnotesize {{ title|title }} }}
+{\textbf {\footnotesize ((( title|title ))) }}
 
 \vspace{6pt}
 
@@ -120,7 +120,7 @@ and Contents at a Glance links to access them. }
 
 \noindent
 \begin{pspicture}(2.5,1in)
-    \psbarcode{ {{ uid[:10] }} }{includetext}{code39}
+    \psbarcode{ ((( uid[:10] ))) }{includetext}{code39}
 \end{pspicture}
 
 \vfill
@@ -168,7 +168,7 @@ and Contents at a Glance links to access them. }
 
 \begin{flushright}
 \scriptsize{
-  \texttt{ {{ title|title }} \\ {{ title[:3]|upper }}-{{ uid[:10] }} }
+  \texttt{ ((( title|title ))) \\ ((( title[:3]|upper )))-((( uid[:10] ))) }
 }
 \end{flushright}
 
@@ -188,15 +188,15 @@ and Contents at a Glance links to access them. }
 \section*{Preface}
 {\normalsize
 \begin{flushleft}
-\emph{Congratulations!} You are now reading \textbf{ {{ title }} }. The
-purpose of this eBook is to educate and inform about {{ title }}.
+\emph{Congratulations!} You are now reading \textbf{ ((( title ))) }. The
+purpose of this eBook is to educate and inform about ((( title ))).
 \end{flushleft}
 
 \begin{flushleft}
 With an overwhelming emphasis on practical, real-world case presented
-in a terse, to-the-point format, this {{ title }} will serve as an
+in a terse, to-the-point format, this ((( title ))) will serve as an
 ideal resource for those looking to familiarize themselves with the 
-{{ title }}.
+((( title ))).
 \end{flushleft}
 
 \begin{flushleft}
@@ -204,12 +204,12 @@ What's pleased me the most about this book is the significant
 attention to detail from the author to the inner workings of the
 library. You can be safe knowing that the resouce that you have before
 you is one of the best thought-out and researched pieces of literature
-on the {{ title }}.
+on the ((( title ))).
 \end{flushleft}
 
 \begin{flushleft}
 With resources like this book, I hope you will begin your exploration
-more on the {{ title }}.
+more on the ((( title ))).
 \end{flushleft}
 }
 
@@ -225,7 +225,7 @@ readable and chock-full of working explanation. Five stars all round!
 \end{quote}
 \begin{quote}
 I highly recommend the book for learning the fundamentals of 
-{{ title }} and then serving as a good reference book as you leverage the
+((( title ))) and then serving as a good reference book as you leverage the
 power more and more in your daily need.
 \end{quote}
 \begin{quote}
@@ -237,12 +237,12 @@ Thanks to the authors, the picture and explanation throughout the book
 are relevant, and make the point effectively.
 \end{quote}
 \begin{quote}
-An 8 out 10! If you want to learn {{ title }} then this is an
+An 8 out 10! If you want to learn ((( title ))) then this is an
 excellent book ...
 \end{quote}
 \begin{quote}
-I think that {{ title }} is an excellent book that will help you learn
-and understand {{ title }}. I certainly enjoyed reading the book.
+I think that ((( title ))) is an excellent book that will help you learn
+and understand ((( title ))). I certainly enjoyed reading the book.
 \end{quote}
 }
 }
@@ -254,7 +254,7 @@ and understand {{ title }}. I certainly enjoyed reading the book.
 \emph{
 \large{
 \underline{
-\href{http://www.seepdf.com/download/{{ title|title }} }{Register and download to continue reading ...}
+\href{http://www.seepdf.com/download/((( title|title ))) }{Register and download to continue reading ...}
 }}}}
 
 \clearpage % let's start some fake related books here.
@@ -262,66 +262,55 @@ and understand {{ title }}. I certainly enjoyed reading the book.
 \begin{thebibliography}{99}
 
 \bibitem{satu}
-\emph{ {{prewords[0]}}}, { {{snippets[0]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[0] )))}, ``{((( snippets[0]|safe )))}'', \href{((( lander[0] ))) }{Read or Download}
 \bibitem{dua}
-\emph{
-{{prewords[1]}}}, { {{snippets[1]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[1] )))}, ``{((( snippets[1]|safe )))}'', \href{((( lander[1] )))}{Read or Download}, 1994.
 \bibitem{tiga}
-\emph{
-{{prewords[2]}}}, { {{snippets[2]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[2] )))}, ``{((( snippets[2]|safe )))}'', \href{((( lander[2] )))}{Read or Download}, 1994.
 \bibitem{empat}
-\emph{
-{{prewords[3]}}}, { {{snippets[3]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[3] )))}, ``{((( snippets[3]|safe )))}'', \href{((( lander[3] )))}{Read or Download}, 1994.
 \bibitem{lima}
-\emph{
-{{prewords[4]}}}, { {{snippets[4]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[4] )))}, ``{((( snippets[4]|safe )))}'', \href{((( lander[4] )))}{Read or Download}, 1994.
 \bibitem{enam}
-\emph{
-{{prewords[5]}}}, { {{snippets[5]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[5] )))}, ``{((( snippets[5]|safe )))}'', \href{((( lander[5] )))}{Read or Download}, 1994.
 \bibitem{tujuh}
-\emph{
-{{prewords[6]}}}, { {{snippets[6]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[6] )))}, ``{((( snippets[6]|safe )))}'', \href{((( lander[6] )))}{Read or Download}, 1994.
 \bibitem{delapan}
-\emph{
-{{prewords[7]}}}, { {{snippets[7]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[7] )))}, ``{((( snippets[7]|safe )))}'', \href{((( lander[7] )))}{Read or Download}, 1994.
 \bibitem{sembilan}
-\emph{
-{{prewords[8]}}}, { {{snippets[8]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[8] )))}, ``{((( snippets[8]|safe )))}'', \href{((( lander[8] )))}{Read or Download}, 1994.
 \bibitem{sepuluh}
-\emph{
-{{prewords[9]}}}, { {{snippets[9]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[9] )))}, ``{((( snippets[9]|safe )))}'', \href{((( lander[9] )))}{Read or Download}, 1994.
 \bibitem{sebelas}
-\emph{
-{{prewords[10]}}}, { {{snippets[10]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[10] )))}, ``{((( snippets[10]|safe )))}'', \href{((( lander[10] )))}{Read or Download}, 1994.
 \bibitem{duabelas}
-\emph{
-{{prewords[11]}}}, { {{snippets[11]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[11] )))}, ``{((( snippets[11]|safe )))}'', \href{((( lander[11] )))}{Read or Download}, 1994.
 \bibitem{tigabelas}
-\emph{
-{{prewords[12]}}}, { {{snippets[12]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[12] )))}, ``{((( snippets[12]|safe )))}'', \href{((( lander[12] )))}{Read or Download}, 1994.
 \bibitem{empatbelas}
-\emph{
-{{prewords[13]}}}, { {{snippets[13]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[13] )))}, ``{((( snippets[13]|safe )))}'', \href{((( lander[13] )))}{Read or Download}, 1994.
 \bibitem{limabelas}
-\emph{
-{{prewords[14]}}}, { {{snippets[14]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[14] )))}, ``{((( snippets[14]|safe )))}'', \href{((( lander[14] )))}{Read or Download}, 1994.
 \bibitem{enambelas}
-\emph{
-{{prewords[15]}}}, { {{snippets[15]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[15] )))}, ``{((( snippets[15]|safe )))}'', \href{((( lander[15] )))}{Read or Download}, 1994.
 \bibitem{tujuhbelas}
-\emph{
-{{prewords[16]}}}, { {{snippets[16]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[16] )))}, ``{((( snippets[16]|safe )))}'', \href{((( lander[16] )))}{Read or Download}, 1994.
 \bibitem{delapanbelas}
-\emph{
-{{prewords[17]}}}, { {{snippets[17]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[17] )))}, ``{((( snippets[17]|safe )))}'', \href{((( lander[17] )))}{Read or Download}, 1994.
 \bibitem{sembilanbelas}
-\emph{
-{{prewords[18]}}}, { {{snippets[18]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
+\emph{((( prewords[18] )))}, ``{((( snippets[18]|safe )))}'', \href{((( lander[18] )))}{Read or Download}, 1994.
 \bibitem{duapuluh}
-\emph{
-{{prewords[19]}}}, { {{snippets[19]|safe }} }, \href{http://www.google.com}{Click to read}, 1994.
-
-
+\emph{((( prewords[19] )))}, ``{((( snippets[19]|safe )))}'', \href{((( lander[19] )))}{Read or Download}, 1994.
+\bibitem{duapuluhsatu}
+\emph{((( prewords[20] )))}, ``{((( snippets[20]|safe )))}'', \href{((( lander[20] )))}{Read or Download}, 1994.
+\bibitem{duapuluhdua}
+\emph{((( prewords[21] )))}, ``{((( snippets[21]|safe )))}'', \href{((( lander[21] )))}{Read or Download}, 1994.
+satu\bibitem{duapuluhtiga}
+\emph{((( prewords[22] )))}, ``{((( snippets[22]|safe )))}'', \href{((( lander[22] )))}{Read or Download}, 1994.
+satu\bibitem{duapuluhempat}
+\emph{((( prewords[23] )))}, ``{((( snippets[23]|safe )))}'', \href{((( lander[23] )))}{Read or Download}, 1994.
+satu\bibitem{duapuluhlima}
+\emph{((( prewords[24] )))}, ``{((( snippets[24]|safe )))}'', \href{((( lander[24] )))}{Read or Download}, 1994.
 
 \end{thebibliography}
 
