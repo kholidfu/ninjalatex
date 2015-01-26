@@ -68,7 +68,7 @@ def render_template(template_filename, context):
 # randomize template
 # template_collection = ["index.tex", "index2.tex"]  # <= wiring + auto templates
 # template_collection = ["index3.tex", "index4.tex"]  # <= hanan+maxi
-template_collection = ["index5.tex"]  # <= general + database connected
+template_collection = ["index5.tex", "index6.tex"]  # <= general + database connected
 
 
 def spin(content):
