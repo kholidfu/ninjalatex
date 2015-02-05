@@ -1,7 +1,7 @@
 ninjalatex
 ==========
 
-the married of jinja2 templating engine with latex
+the marriage of jinja2 templating engine with latex
 
 Goals
 -----
