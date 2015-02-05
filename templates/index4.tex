@@ -6,9 +6,9 @@
 % set pdf title metadata
 \usepackage[pdftex,
   pdfauthor={ Joan De PDF },
-  pdftitle={ {{ title|upper }} },
-  pdfsubject={ {{ title }} },
-  pdfkeywords={ {{ keywords }} },
+  pdftitle={((( title|upper )))},
+  pdfsubject={((( title )))},
+  pdfkeywords={((( keywords )))},
   hidelinks=true]{hyperref}
 
 % barcode
@@ -27,7 +27,7 @@
 % cover coloring
 \usepackage{xcolor}
 %\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
-\definecolor{titlepagecolor}{cmyk}{ {{ colors }} }
+\definecolor{titlepagecolor}{cmyk}{((( colors )))}
 
 % image
 \usepackage{graphicx}
@@ -69,8 +69,6 @@
 % bagian title start
 \begin{titlepage}
 
-\newgeometry{left=2cm} % defines the geometry for the titlepage
-
 % coloring the cover
 \pagecolor{titlepagecolor}
 % font color set to white
@@ -105,184 +103,116 @@ and Contents at a Glance links to access them. }
 \end{titlepage}
 % bagian title end
 
-% reset
-\restoregeometry % restores the geometry
 \nopagecolor % restore to white page background color
-
-\noindent
-{\textbf {\footnotesize {{ title|title }} }}
-
-\vspace{6pt}
-
-\noindent
-\scriptsize{Copyright @2014. All rights reserved. \\Printed in the United
-  States of America.}
-
-\noindent
-\scriptsize{This books may be purchased for educational, business or
-  sales promotional use. Online editions are also available for most
-  titles. For more information, please contact our
-  corporate/institutional sales department.}
-
-\vspace{12pt}
-
-\noindent
-\begin{pspicture}(2.5,1in)
-    \psbarcode{ {{ uid[:10] }} }{includetext}{code39}
-\end{pspicture}
-
-\vfill
-
-\noindent
-\scriptsize{Many of the designations used by manufacturers and sellers
-  to distinguish their products are claimed as trademarks. Where those
-  designations appear in this book, and we was aware of a trademark
-  claim, the designations have been printed in caps or initial caps.}
-
-\vspace{10pt}
-
-\noindent
-\scriptsize{While every precautions has been taken in the preparation of
-  this book, the publisher and author assume no responsibility for
-  errors or omissions, or for damage resulting from the use of the
-  information contained herein.}
-
-\vspace{10pt}
-
-\noindent
-\scriptsize{The illustrations, technical information, data and
-  descriptive text in this issue, to the best of our knowledge, were
-  correct at the time of going to print. The right to make changes at
-  any time, without notice, is reserved as part of continuous
-  development and improvement.
-}
-
-\vspace{10pt}
-
-\noindent
-\scriptsize{No liability can be accepted for any inaccuracies or
-  omissions in this publication, although every possible care has been
-  taken to make it as complete and accurate as possible.}
-
-\vspace{10pt}
-
-\noindent
-\scriptsize{No part of this publication may be reproduced, stored in a
-  retrieval system or transmitted in any form, electronic, mechanical,
-  photocopying, recording, translating or by other means without prior
-  written permission.}
-
-\vspace{15pt}
-
-\begin{flushright}
-\scriptsize{
-  \texttt{ {{ title|title }} \\ {{ title[:3]|upper }}-{{ uid[:10] }} }
-}
-\end{flushright}
-
-\clearpage
 
 %% halaman 2
 
-\section*{SPUN}
-
-{\normalsize
-  blabla.\cite{satu}
-
-  {{ content|safe }} 
-  % {{ content2 }} <= jejer
-}
-
-\clearpage
-
-\begin{thebibliography}{99}
-
-\bibitem{satu}
-\emph{
-{{ prewords[1] }}}, \href{http://www.google.com}{Click to read}, 1994.
-
-\end{thebibliography}
-
-\clearpage
-
 \noindent
-\begin{center}
-{\normalsize \emph{This page intentionally left blank}}
-\end{center}
+{\textbf {\footnotesize ((( title|title )))}}
 
-\clearpage
+\vspace{6pt}
 
-\section*{Preface}
-{\normalsize
-\begin{flushleft}
-\emph{Congratulations!} You are now reading \textbf{ {{ title }} }. The
-purpose of this eBook is to educate and inform about {{ title }}.
-\end{flushleft}
+% content dari tex1 :: 4 paragrap shuffle
 
-\begin{flushleft}
-With an overwhelming emphasis on practical, real-world case presented
-in a terse, to-the-point format, this {{ title }} will serve as an
-ideal resource for those looking to familiarize themselves with the 
-{{ title }}.
-\end{flushleft}
+((( tex11 )))
 
-\begin{flushleft}
-What's pleased me the most about this book is the significant
-attention to detail from the author to the inner workings of the
-library. You can be safe knowing that the resouce that you have before
-you is one of the best thought-out and researched pieces of literature
-on the {{ title }}.
-\end{flushleft}
+((( tex12 )))
 
-\begin{flushleft}
-With resources like this book, I hope you will begin your exploration
-more on the {{ title }}.
-\end{flushleft}
-}
+((( tex13 )))
 
-\clearpage
+((( tex14 )))
 
-\section*{Praise for the First Edition}
-
-{\emph
-{\normalsize
-\begin{quote}
-This is an excellent work, a worthy successor to others. It is highly
-readable and chock-full of working explanation. Five stars all round!
-\end{quote}
-\begin{quote}
-I highly recommend the book for learning the fundamentals of 
-{{ title }} and then serving as a good reference book as you leverage the
-power more and more in your daily need.
-\end{quote}
-\begin{quote}
-It works and makes for a very readable book that you can just breeze
-through very quickly and pick up and retain a lot of information.
-\end{quote}
-\begin{quote}
-Thanks to the authors, the picture and explanation throughout the book
-are relevant, and make the point effectively.
-\end{quote}
-\begin{quote}
-An 8 out 10! If you want to learn {{ title }} then this is an
-excellent book ...
-\end{quote}
-\begin{quote}
-I think that {{ title }} is an excellent book that will help you learn
-and understand {{ title }}. I certainly enjoyed reading the book.
-\end{quote}
-}
-}
-
-\vspace{20pt}
+\vspace{15pt}
 
 \noindent
 {\color{blue}
 \emph{
 \large{
 \underline{
-\href{http://www.seepdf.com/download/{{ title|title }} }{Register and download to continue reading ...}
+\href{http://www.seepdf.com/download/((( title|title )))}{Register and download to continue reading ...}
 }}}}
 
+\vspace{15pt}
+
+\begin{flushright}
+\scriptsize{
+  \texttt{((( title|title ))) \\ ((( title[:3]|upper )))-((( uid[:10] )))}
+}
+\end{flushright}
+
+\clearpage
+
+%% halaman 3
+
+\section*{WARNING}
+
+((( tex2 )))
+
+\vspace{12pt}
+
+((( tex31 )))
+
+((( tex32 )))
+
+((( tex33 )))
+
+\clearpage
+
+%% halaman 4
+
+\begin{thebibliography}{99}
+
+\bibitem{satu}
+\emph{\textbf{((( prewords[0] )))}}, \href{((( lander[0] ))) }{Read or Download}.
+\bibitem{dua}
+\emph{\textbf{((( prewords[1] )))}}, \href{((( lander[1] )))}{Read or Download}.
+\bibitem{tiga}
+\emph{\textbf{((( prewords[2] )))}}, \href{((( lander[2] )))}{Read or Download}.
+\bibitem{empat}
+\emph{\textbf{((( prewords[3] )))}}, \href{((( lander[3] )))}{Read or Download}.
+\bibitem{lima}
+\emph{\textbf{((( prewords[4] )))}}, \href{((( lander[4] )))}{Read or Download}.
+\bibitem{enam}
+\emph{\textbf{((( prewords[5] )))}}, \href{((( lander[5] )))}{Read or Download}.
+\bibitem{tujuh}
+\emph{\textbf{((( prewords[6] )))}}, \href{((( lander[6] )))}{Read or Download}.
+\bibitem{delapan}
+\emph{\textbf{((( prewords[7] )))}}, \href{((( lander[7] )))}{Read or Download}.
+\bibitem{sembilan}
+\emph{\textbf{((( prewords[8] )))}}, \href{((( lander[8] )))}{Read or Download}.
+\bibitem{sepuluh}
+\emph{\textbf{((( prewords[9] )))}}, \href{((( lander[9] )))}{Read or Download}.
+\bibitem{sebelas}
+\emph{\textbf{((( prewords[10] )))}}, \href{((( lander[10] )))}{Read or Download}.
+\bibitem{duabelas}
+\emph{\textbf{((( prewords[11] )))}}, \href{((( lander[11] )))}{Read or Download}.
+\bibitem{tigabelas}
+\emph{\textbf{((( prewords[12] )))}}, \href{((( lander[12] )))}{Read or Download}.
+\bibitem{empatbelas}
+\emph{\textbf{((( prewords[13] )))}}, \href{((( lander[13] )))}{Read or Download}.
+\bibitem{limabelas}
+\emph{\textbf{((( prewords[14] )))}}, \href{((( lander[14] )))}{Read or Download}.
+\bibitem{enambelas}
+\emph{\textbf{((( prewords[15] )))}}, \href{((( lander[15] )))}{Read or Download}.
+\bibitem{tujuhbelas}
+\emph{\textbf{((( prewords[16] )))}}, \href{((( lander[16] )))}{Read or Download}.
+\bibitem{delapanbelas}
+\emph{\textbf{((( prewords[17] )))}}, \href{((( lander[17] )))}{Read or Download}.
+\bibitem{sembilanbelas}
+\emph{\textbf{((( prewords[18] )))}}, \href{((( lander[18] )))}{Read or Download}.
+\bibitem{duapuluh}
+\emph{\textbf{((( prewords[19] )))}}, \href{((( lander[19] )))}{Read or Download}.
+\bibitem{duapuluhsatu}
+\emph{\textbf{((( prewords[20] )))}}, \href{((( lander[20] )))}{Read or Download}.
+\bibitem{duapuluhdua}
+\emph{\textbf{((( prewords[21] )))}}, \href{((( lander[21] )))}{Read or Download}.
+satu\bibitem{duapuluhtiga}
+\emph{\textbf{((( prewords[22] )))}}, \href{((( lander[22] )))}{Read or Download}.
+satu\bibitem{duapuluhempat}
+\emph{\textbf{((( prewords[23] )))}}, \href{((( lander[23] )))}{Read or Download}.
+satu\bibitem{duapuluhlima}
+\emph{\textbf{((( prewords[24] )))}}, \href{((( lander[24] )))}{Read or Download}.
+
+\end{thebibliography}
 
 \end{document}
