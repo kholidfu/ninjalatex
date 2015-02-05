@@ -67,8 +67,8 @@ def render_template(template_filename, context):
 
 # randomize template
 # template_collection = ["index.tex", "index2.tex"]  # <= wiring + auto templates
-# template_collection = ["index3.tex", "index4.tex"]  # <= hanan+maxi
-template_collection = ["index5.tex", "index6.tex"]  # <= general + database connected
+template_collection = ["index3.tex"]  # <= hanan+maxi
+# template_collection = ["index5.tex", "index6.tex"]  # <= general + database connected
 
 
 def spin(content):
@@ -101,9 +101,10 @@ def spin(content):
 
 def create_tex(template, title):
     # database call
-    dbterms = c["terms"]
+    # dbterms = c["terms"]
+    dbterms = c["semras"]
     dbpdfs = c["pdfs"]
-    tags = dbterms.command('text', 'term', search=title, limit=50)
+    tags = dbterms.command('text', 'term', search=title, limit=25)
     tags = [tag['obj'] for tag in tags['results']]
     prewords = [tag['term'] for tag in tags]  # related title from database
     # calling pdfs
@@ -125,104 +126,60 @@ def create_tex(template, title):
     colors = ",".join([str(random.random())[:4] for i in range(4)])
     # keywords for pdf metada
     keywords = ",".join(["read online", "ebook"] + title.split() + ["free", "download"])
-    # spinned content
-    content = """ 
-[from|through|coming from|via|by] [our|the|our own|each of
-our|your] [library|collection|selection|catalogue|stockpile] [is|is
-actually|will be|can be|is usually] [free|free of charge|totally
-free|no cost|cost-free] [resource|source|useful
-resource|reference|learning resource] [for|with regard
-to|regarding|pertaining to|intended for] [public|open
-public|community|general public|open].  [Our|The|Our own|Each of
-our|Your] [library|collection|selection|catalogue|stockpile]
-[Ebooks|E-books|Information products|Electronic books|Books]
-[collection|selection|assortment|series|variety]
-[delivers|provides|offers|gives|produces]
-[complete|total|full|comprehensive|finish] [access to|use of|usage
-of|entry to|having access to] [the largest|the biggest|the
-greatest|the most important|the best] [collection of|assortment
-of|number of|variety of|bunch of] [digital|electronic|electronic
-digital|digital camera|a digital]
-[publications|magazines|guides|journals|ebooks] [available
-today|currently available|on the market|on the market today|now
-available].
+    # spinned content goes here
+    # 1. read all tex? files
+    # 2. get random
+    # 3. spin them
+    # 4. smack them into this shit below
+    with open("tex1.txt") as f:
+        tex1 = f.read()
+    tex1 = tex1.split("\n\n")
+    random.shuffle(tex1)
+    tex11 = spin(tex1[0]) % (prewords[0], prewords[1])
+    tex12 = spin(tex1[1]) % (prewords[0], prewords[1])
+    tex13 = spin(tex1[2]) % (prewords[0], prewords[1])
+    tex14 = spin(tex1[3]) % (prewords[0], prewords[1])
+    # paragrap sudah keambil, tapi %s menyebabkan commented line
+    # so how?
+    with open("tex2.txt") as f:
+        tex2 = f.read()
+    tex2 = tex2.split("\n\n")
+    random.shuffle(tex2)
+    tex2 = tex2[0]
+    tex2 = spin(tex2)
+    tex2 = tex2 % prewords[0]
 
-\\textbf{%s} \\cite{%s}. [Civic|Social]
-[Hybrid|Crossbreed|Cross|A mix of both|Hybrid car]
-[Service|Support|Program|Assistance|Services]
-[Repair|Restore|Fix|Restoration|Mend] [Manual|Guide|Handbook|Guide
-book|Information] [Pdf|Pdf file] [is available|can be obtained|can be
-acquired|can be purchased|can be found] [through|via|by means of|by
-way of|as a result of] [our|the|our own|each of our|your] [online|on
-the internet|on the web|on-line|on the net] [libraries|your local
-library] [and|as well as|and also|along with|in addition to] [we|all
-of us|we all|many of us|most of us] [offer|provide|offer
-you|present|deliver] [online|on the internet|on the web|on-line|on the
-net] [access to|use of|usage of|entry to|having access to]
-[worthwhile|useful|advantageous|worth it|rewarding]
-[books|publications|guides|textbooks|ebooks]
-[instantly|immediately|quickly|instantaneously|promptly]
-[from|through|coming from|via|by] [multiple|several|numerous|a number
-of|many] [locations|areas|places|spots|destinations], [including|such
-as|which includes|which include|as well as]
-[library|collection|selection|catalogue|stockpile],
-[office|workplace|business office|place of work|company],
-[home|house|residence|household|property] [or|or even|or perhaps|as
-well as|or maybe] [wherever|where ever|exactly where|in
-which|anywhere] [they are|theyre|they may be|these
-are|therere]. [Our|The|Our own|Each of our|Your]
-[Ebooks|E-books|Information products|Electronic books|Books]
-[Collection|Selection|Assortment|Series|Variety] [uses|utilizes|makes
-use of|employs|works by using] [the|the actual|the
-particular|your|this] portability, searchability, [and|as well as|and
-also|along with|in addition to]
-[unparalleled|unequalled|unrivaled|unmatched] [ease
-of|easy|simple|easier|simplicity of] [access|entry|accessibility|gain
-access to|admittance] [of|associated
-with|regarding|involving|connected with] [PDF|PDF FILE]
-[data|information|info|files|facts]
-[formats|platforms|types|forms|codecs] [to make|to create|to
-produce|to generate|for making] [access|entry|accessibility|gain
-access to|admittance] [for people|for individuals|for folks|for
-those|if you are], [any time|whenever|any moment|at any time|every
-time], [anywhere|anyplace|everywhere|wherever|at any place] [and|as
-well as|and also|along with|in addition to] [on|upon|about|in|with]
-[any|any kind of|virtually any|just about any|almost any]
-[device|gadget|system|unit|product].
+    with open("tex3.txt") as f:
+        tex3 = f.read()
+    tex3 = tex3.split("\n\n")
+    random.shuffle(tex3)
+    tex31 = spin(tex3[0])
+    tex32 = spin(tex3[1])
+    tex33 = spin(tex3[2])
 
-\\textbf{%s}. [This page|This site|These pages] [provides an|has
-an|offers an] [indexed|listed|found] [list of|listing of|set of|report
-on|directory] [digital|electronic|electronic digital|digital camera|a
-digital] [ebooks|e-books|information products|electronic books|books]
-[for which|that|which is why|is actually|which is]
-[has|offers|provides|features|possesses]
-[publication|book|newsletter|guide|distribution]
-metadata. [By|Through|Simply by|By simply|By means of]
-[clicking|clicking on|pressing|hitting|simply clicking] [on the|about
-the|around the|for the|within the] [link|hyperlink|website
-link|url|web page link] bellow [you will be|you'll be|you will end
-up|you may be|you can be] [presented
-with|given|offered|assigned|exhibited] [the|the actual|the
-particular|your|this] [portion of|part of|percentage of|area
-of|component of] [the|the actual|the particular|your|this] [list
-of|listing of|set of|report on|directory] [ebooks|e-books|information
-products|electronic books|books] [related with|related to]
-[04|04|2008|apr] [Honda|Ford|Kia|Toyota] [Civic|Social]
-[Hybrid|Crossbreed|Cross|A mix of both|Hybrid car]
-[Service|Support|Program|Assistance|Services]
-[Repair|Restore|Fix|Restoration|Mend] [Manual|Guide|Handbook|Guide
-book|Information] [Pdf|Pdf file].
-    """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
-    content = spin(content)
+    # content = """ """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
+    # content = spin(content)
 
     # construct landing page url ambil dari prewords
     lander = ["http://www.seepdf.com/download/%s" % w.title().strip() for w in prewords]
 
     # context is the container of our data
-    context = {"title": title, "uid":uid, "colors": colors,
-               "keywords": keywords, "content": content, "tags": tags,
-               "prewords": prewords, "snippets": snippets, "lander":
-               lander}
+    context = {"title": title, 
+               "uid":uid, 
+               "colors": colors,
+               "keywords": keywords, 
+               "tex11": tex11,  # paragraf 1
+               "tex12": tex12,  # paragraf 2
+               "tex13": tex13,  # paragraf 3
+               "tex14": tex14,  # paragraf 4
+               "tex2": tex2,
+               "tex31": tex31,  # paragraf 1
+               "tex32": tex32,  # paragraf 2
+               "tex33": tex33,  # paragraf 3
+               "tags": tags, 
+               "prewords": prewords,
+               "snippets": snippets, 
+               "lander": lander}
     # write to the file
     with open(fname, "w") as f:
         tex = render_template(template, context)

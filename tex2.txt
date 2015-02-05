@@ -1,0 +1,35 @@
+For Your [Safety|Security]
+[Read|Learn] these carefully. Not following them [may be|could also be] [danger|hazard] ous or illegal. [Read|Learn] [the complete|the entire|the whole] \textbf{%s} for [further|additional] information.
+
+
+[Safety|Security] Precautions
+[The following|The next] [safety|security] precautions will [increase|improve|enhance] the life the product. [Follow|Comply with|Observe] all precautions and instructions. [Except|Besides] as described [in this|on this] \textbf{%s}, refer all servicing to [qualified|certified] personnel.
+
+
+SAFETY PRECAUTION IMPORTANT SERVICE SAFETY PRECAUTION
+Service work [should be|ought to be|must be|needs to be] [performed|carried out] [only|solely] by [qualified|certified] service technicians [who are|whore] [thoroughly|completely|totally] [familiar with|conversant in|acquainted with|accustomed to|aware of] all [safety|security] 
+checks and the servicing [guidelines|tips|pointers] which [follow|comply with|observe] this \textbf{%s}.
+
+
+CAUTION:
+This product \textbf{%s} satisfies FCC [regulations|laws|rules] when shielded cables and connectors are used [to connect|to attach] the unit to [other|different]
+equipment. [To prevent|To stop|To forestall] electromagnetic interference with [electric|electrical] [appliances|home equipment] [such as|similar to|corresponding to|comparable to|akin to|reminiscent of|resembling|equivalent to] radios and televisions, use shielded
+cables and connectors for connections.
+
+
+WARNING:
+FCC [Regulations|Laws|Rules] state that any unauthorized [changes|modifications|adjustments] \textbf{%s} or modifications to this [equipment|gear|tools] not expressly [approved|accredited|permitted|accepted|authorised|authorized] by the [manufacturer|producer] [could|might|may] void the [user|consumer|person]s authority to [operate|function] this equipment.
+
+
+CAUTION:
+Listed [in the|within the] [table|desk] [below|under|beneath] are the symbols indicating [instructions|directions] [in this|on this] \textbf{%s} and [other|different] [information|info|data] [necessary|needed|essential|vital|crucial|mandatory|obligatory] for servicing.
+The [meaning|which means|that means] [of each|of every] [symbol|image] [is also|can also be|can be] included [in the|within the] [table|desk]
+
+
+[Safety|Security] Warning [Notice|Discover] \textbf{%s}
+[To reduce|To scale back|To cut back] [the possibility of|the potential of|the potential for|the opportunity of] [heat|warmth]-[related|associated] [injuries|accidents] or of overheating the [device|system|gadget|machine], [do not|dont] place the [device|system|gadget|machine] [directly|immediately|instantly|straight] [on your|in your] lap or [obstruct|impede|hinder] the [device|system|gadget|machine] air vents. Use the [device|system|gadget|machine] [only|solely] on [a hard|a tough], flat surface.
+[Do not|Dont] [allow|permit|enable] [another|one other] [hard|exhausting|onerous|arduous|laborious] [surface|floor], [such as|similar to|corresponding to|comparable to|akin to|reminiscent of|resembling|equivalent to] an adjoining [optional|optionally available|elective|non-compulsory|non-obligatory] printer, or a [soft|gentle|delicate|tender|smooth|mushy|comfortable] [surface|floor], [such as|similar to|corresponding to|comparable to|akin to|reminiscent of|resembling|equivalent to] pillows or rugs or [clothing|clothes], [to block|to dam] airflow.
+
+
+WARNING
+[BE SURE TO|MAKE SURE TO|REMEMBER TO|MAKE SURE YOU|YOULL WANT TO|BE SURE YOU|YOU SHOULD DEFINITELY] [COMPLETELY|UTTERLY|FULLY] [READ|LEARN] \textbf{%s} AND [UNDERSTAND|PERCEIVE] THE CONTENTS OF THIS [MANUAL|GUIDE|HANDBOOK] [BEFORE|EARLIER THAN] ANY [ATTEMPT|TRY] IS MADE [TO INSTALL|TO PUT IN], [OPERATE|FUNCTION] OR MAINTE NANCE THIS PRODUCT.
