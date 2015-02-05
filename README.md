@@ -29,7 +29,7 @@ texlive-pstricks``
 
 #### Usage
 
-``python pdfgen.py path/to/your/setem.txt``
+``python pdfgen.py path/to/your/setem.txt assets_dir``
 
 #### Note
 
