@@ -54,7 +54,6 @@ env = Environment(
     trim_blocks=False,
     variable_start_string = '(((',
     variable_end_string = ')))',
-    # extensions=["jinja2.ext.autoescape"],
 )
 
 # custom filter for latex
@@ -100,6 +99,9 @@ def spin(content):
 
 
 def create_tex(template, title):
+    """
+    built a tex file using database and spinned content (*.txt)
+    """
     # database call
     # dbterms = c["terms"]
     dbterms = c["semras"]
@@ -107,30 +109,27 @@ def create_tex(template, title):
     tags = dbterms.command('text', 'term', search=title, limit=25)
     tags = [tag['obj'] for tag in tags['results']]
     prewords = [tag['term'] for tag in tags]  # related title from database
+
     # calling pdfs
     snippets = dbpdfs.command("text", "pdf", search=title, limit=50)
     snippets = [snippet['obj'] for snippet in snippets['results']]
+
     # pake slugify biar bersih dari non char
-    # which may conflict with latex
-    # escape_tex can be used too though
     snippets = [slugify(unidecode(snippet['snippet'])).replace("-", " ") for snippet in snippets]  # related snippet from dbase
     tags = "\n\n".join(tag['term'] for tag in tags)
-    # tags = "\n\n".join(["satu", "dua", "tiga"])
+
     # output/generated file
     fname = "output.tex"
-    # variables we will use in template
-    # title = "2001 ford taurus automatic transmission wiring schematic"
+
     # generate unique id for each book (mimic isbn)
     uid = hashlib.md5(title).hexdigest().upper()
     # generate random color for cover needs
     colors = ",".join([str(random.random())[:4] for i in range(4)])
     # keywords for pdf metada
     keywords = ",".join(["read online", "ebook"] + title.split() + ["free", "download"])
+
     # spinned content goes here
-    # 1. read all tex? files
-    # 2. get random
-    # 3. spin them
-    # 4. smack them into this shit below
+    # tex1.txt
     with open("tex1.txt") as f:
         tex1 = f.read()
     tex1 = tex1.split("\n\n")
@@ -139,8 +138,8 @@ def create_tex(template, title):
     tex12 = spin(tex1[1]) % (prewords[0], prewords[1])
     tex13 = spin(tex1[2]) % (prewords[0], prewords[1])
     tex14 = spin(tex1[3]) % (prewords[0], prewords[1])
-    # paragrap sudah keambil, tapi %s menyebabkan commented line
-    # so how?
+
+    # tex2.txt
     with open("tex2.txt") as f:
         tex2 = f.read()
     tex2 = tex2.split("\n\n")
@@ -149,6 +148,7 @@ def create_tex(template, title):
     tex2 = spin(tex2)
     tex2 = tex2 % prewords[0]
 
+    # tex3.txt
     with open("tex3.txt") as f:
         tex3 = f.read()
     tex3 = tex3.split("\n\n")
@@ -156,9 +156,6 @@ def create_tex(template, title):
     tex31 = spin(tex3[0])
     tex32 = spin(tex3[1])
     tex33 = spin(tex3[2])
-
-    # content = """ """ % (unidecode(prewords[0]), "satu", unidecode(prewords[1]))
-    # content = spin(content)
 
     # construct landing page url ambil dari prewords
     lander = ["http://www.seepdf.com/download/%s" % w.title().strip() for w in prewords]
@@ -227,9 +224,9 @@ if __name__ == "__main__":
             # generate the tex file
             create_tex(choosen_template, title)
             # generate the pdf file
-            subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-            #                stdout=FNULL, stderr=subprocess.STDOUT)
+            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+            subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+                           stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
             fname = "%s.pdf" % slugify(unicode(title))
