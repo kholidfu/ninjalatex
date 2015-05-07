@@ -242,7 +242,7 @@ if __name__ == "__main__":
             #               stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
-            fname = "%s.pdf" % slugify(unicode(title))
+            fname = "%s.pdf" % unicode(title.title().replace(" ", "-"))
             # build dirpath
             # dirname = os.path.join(title[0], "".join(title.split())[:2])
             dirname = os.path.join(asset_dir, title[0])  # lgsg 1 dir saja
