@@ -19,7 +19,9 @@ cur.execute("USE book")
 # chandler.execute("SHOW TABLES")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
-results = [i for i in results if i[3]][:5]
+
+lim = 1  # num of pdf generated
+results = [i for i in results if i[3]][:lim]
 
 # build clean slug for filename
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -91,19 +93,68 @@ def spin(content):
             raise "unbalanced brace"
         return content[:start] + random.choice(rest[:end].split('|')) + spin(rest[end+1:])
 
+
+from random import randrange
+from datetime import timedelta
+from datetime import datetime
+
+def random_date(start, end):
+    """
+    This function will return a random datetime between two datetime 
+    objects.
+    """
+    delta = end - start
+    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+    random_second = randrange(int_delta)
+    return start + timedelta(seconds=random_second)
+
         
-def create_tex(template, title):
+def create_tex(template, title, author):
     """
     built a tex file using database and spinned content (*.txt)
     """
     # define data needed
+    uid = hashlib.md5(title).hexdigest().upper()
     colors = ",".join([str(random.random())[:4] for i in range(4)])
     image = "thumb.jpg"
+    # spinned content goes here
+    # book_fafifu.txt
+    with open("book_fafifu.txt") as f:
+        tex1 = f.read()
+        tex1 = tex1.split("\n\n")
+        random.shuffle(tex1)
+        tex11 = spin(tex1[0]) % (title, author)
+        tex12 = spin(tex1[1]) % (title, title)
+        tex13 = spin(tex1[2]) % (title, title)
+
+    # book_related_fafifu.txt
+    
+    # generate random date
+    d1 = datetime.strptime('1/1/2009 4:50 AM', '%m/%d/%Y %I:%M %p')
+    d2 = datetime.strptime(datetime.now().strftime("%m/%d/%Y %I:%M %p"), '%m/%d/%Y %I:%M %p')
+
+    import time
+    t = time.localtime()
+    suffix = 'st' if t.tm_mday in [1,21,31] else 'nd' if t.tm_mday in [2, 22] else 'rd' if t.tm_mday in [3, 23] else 'th'
+
+    rand_date = random_date(d1, d2).strftime('%d%%s of %B %Y %I:%M:%S %p') % suffix
+
+    # ini variable ngambil dari related search di mysql lho ya
+    with open("book_related_fafifu.txt") as f:
+        related_text_raw = f.read()
+        related_text = spin(related_text_raw) % (title, author, rand_date, title)
+
     # context is the container of our data
     context = {
         "title": title,
         "colors": colors,
         "image": image,
+        "author": author,
+        "uid": uid,
+        "tex11": tex11,
+        "tex12": tex12,
+        "tex13": tex13,
+        "related": related_text,
     }
     # write to the file
     fname = "output.tex"
@@ -140,7 +191,8 @@ if __name__ == "__main__":
             # choose randomed template
             choosen_template = random.choice(template_collection)
             # generate the tex file
-            create_tex(choosen_template, title)
+            authors = [i[2] for i in results]
+            create_tex(choosen_template, title, authors[count-1])
             # download the image
             url = [i[3] for i in results][count-1]
             io = urllib2.urlopen(url).read()
