@@ -24,8 +24,12 @@ cur.execute("USE book")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
 
-lim = 1  # num of pdf generated
+
+
+lim = 5  # num of pdf generated
 results = [i for i in results if i[3]][:lim]
+
+domain = sys.argv[1]
 
 # build clean slug for filename
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -69,6 +73,12 @@ def render_template(template_filename, context):
 # randomize template
 template_collection = ["book1.tex"]
 
+# list out of index exception helper
+class MyList(list):
+    """return value at index, else None"""
+    def get(self, index, default=""):
+        return self[index] if len(self) > index else default
+
 
 def spin(content):
     """takes a string like
@@ -110,7 +120,7 @@ def random_date(start, end):
     return start + timedelta(seconds=random_second)
 
         
-def create_tex(template, title, author):
+def create_tex(template, title, author, relatedtitle):
     """
     built a tex file using database and spinned content (*.txt)
     """
@@ -142,7 +152,20 @@ def create_tex(template, title, author):
     # ini variable ngambil dari related search di mysql lho ya
     with open("book_related_fafifu.txt") as f:
         related_text_raw = f.read()
-        related_text = spin(related_text_raw) % (title, author, rand_date, title)
+        relatedtext = spin(related_text_raw) % (title, author, rand_date, title)
+
+    l = MyList(relatedtitle)  # instantiate the class
+
+    # construct the string
+    container = ""
+    for i in relatedtitle:
+        container += "\\noindent\\textbf{\\href{http://%s/download/%s.pdf}{%s}}" % (sys.argv[1], i.replace(" ", "-"), i.upper())
+        container += "\n\n"
+        container += "\\noindent " + spin(related_text_raw % (i, author, rand_date, i))
+        container += "\n\n"
+        container += "\\noindent \\href{http://%s/download/%s.pdf}{http://%s/download/%s.pdf}" % (sys.argv[1], i.replace(" ", "-"), sys.argv[1], i.replace(" ", "-"))
+        container += "\n\n"
+        container += "\\vspace{16pt}"
 
     # context is the container of our data
     context = {
@@ -154,8 +177,10 @@ def create_tex(template, title, author):
         "tex11": tex11,
         "tex12": tex12,
         "tex13": tex13,
-        "related": related_text,
+        "domain": domain,
+        "related": container,
     }
+
     # write to the file
     fname = "output.tex"
     with open(fname, "w") as f:
@@ -173,12 +198,18 @@ def slugify(text, delim=u'-'):
 
 if __name__ == "__main__":
     """
+    steps:
+    1. fetchall semua data dari table di mysql
+    2. loop:
+    - get title, author
+    - download the thumbnail
+    - get related title
     """
     titles = [i[1] for i in results]
 
     # build path and pdf container dir if not exists
     home = os.path.dirname(os.path.abspath(__file__))
-    asset_dir = os.path.join(home, sys.argv[1])  # dibikin flexible dari cmd
+    asset_dir = os.path.join(home, sys.argv[2])  # dibikin flexible dari cmd
     if not os.path.exists(asset_dir):
         os.makedirs(asset_dir)
 
@@ -190,9 +221,14 @@ if __name__ == "__main__":
             logging.info("%s. generating pdf for: %s" % (count, title))
             # choose randomed template
             choosen_template = random.choice(template_collection)
+            # get related data
+            query = "SELECT title FROM coba WHERE MATCH (title) AGAINST ('%s' IN BOOLEAN MODE) > 0 AND status='2' LIMIT 8;" % title
+            cur.execute(query)
+            related_results = cur.fetchall()  # hasilnya tuple of string length 8
+            related_results = [i[0] for i in related_results]  # list of string with length of max. 8
             # generate the tex file
             authors = [i[2] for i in results]
-            create_tex(choosen_template, title, authors[count-1])
+            create_tex(choosen_template, title, authors[count-1], related_results)
             # download the image
             url = [i[3] for i in results][count-1]
             io = urllib2.urlopen(url).read()

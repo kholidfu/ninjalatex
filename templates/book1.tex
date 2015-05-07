@@ -6,7 +6,7 @@
 % set pdf title metadata
 \usepackage[pdftex,
   pdfauthor={ Joan De PDF },
-  pdftitle={((( title|title ))) - google.com},
+  pdftitle={((( title|title ))) - (((domain)))},
   pdfsubject={((( title )))},
   pdfkeywords={((( keywords )))},
   hidelinks=true]{hyperref}
@@ -86,7 +86,7 @@
     \begin{minipage}{0.7\textwidth}
 
 
-      \href{http://www.google.com}{(((title))) eBook - Free of Registration}
+      \href{http://(((domain)))/download/(((title|replace(' ', '-')))).pdf}{(((title))) eBook - Free of Registration}
 
       \vspace{12pt}
 
@@ -102,7 +102,7 @@
 
       \vspace{12pt}
 
-      \href{http://www.google.com}{\includegraphics[width=0.4\textwidth]{button.jpg}}
+      \href{http://(((domain)))/download/(((title|replace(' ', '-')))).pdf}{\includegraphics[width=0.4\textwidth]{button.jpg}}
 
     \end{minipage}
 \end{figure}
@@ -130,11 +130,13 @@
 
 \begin{center}
   \includegraphics[width=0.02\textwidth]{download.png}
-  \href{http://www.google.com}{(((title))) PDF eBook}
+  \href{http://(((domain)))/download/(((title|replace(' ', '-')))).pdf}{(((title))) PDF eBook}
 \end{center}
 
 \clearpage
 
 (((related)))
+
+\noindent Back to Main Website \href{http://(((domain)))}{Download PDF eBooks}
 
 \end{document}
