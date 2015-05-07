@@ -20,3 +20,4 @@ setem.txt
 *.swp
 fdp.txt
 thumb.jpg
+*.pyc
