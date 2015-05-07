@@ -19,7 +19,10 @@ cur.execute("USE book")
 # chandler.execute("SHOW TABLES")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
-results = [i for i in results if i[3]]
+results = [i for i in results if i[3]][:5]
+
+# build clean slug for filename
+_punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
 # latext part
 # latex escaper
@@ -95,11 +98,6 @@ def create_tex(template, title):
     """
     # define data needed
     colors = ",".join([str(random.random())[:4] for i in range(4)])
-    # download the image
-    url = [i[3] for i in results][0]
-    io = urllib2.urlopen(url).read()
-    with open("thumb.jpg", "w") as f:
-        f.write(io)
     image = "thumb.jpg"
     # context is the container of our data
     context = {
@@ -114,10 +112,6 @@ def create_tex(template, title):
         f.write(tex)
 
 
-# build clean slug for filename
-import re
-_punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
-
 def slugify(text, delim=u'-'):
     """Generates an ASCII-only slug."""
     result = []
@@ -129,7 +123,7 @@ def slugify(text, delim=u'-'):
 if __name__ == "__main__":
     """
     """
-    titles = [i[1] for i in results][:1]
+    titles = [i[1] for i in results]
 
     # build path and pdf container dir if not exists
     home = os.path.dirname(os.path.abspath(__file__))
@@ -147,6 +141,11 @@ if __name__ == "__main__":
             choosen_template = random.choice(template_collection)
             # generate the tex file
             create_tex(choosen_template, title)
+            # download the image
+            url = [i[3] for i in results][count-1]
+            io = urllib2.urlopen(url).read()
+            with open("thumb.jpg", "w") as f:
+                f.write(io)
             # generate the pdf file
             subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
             # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
