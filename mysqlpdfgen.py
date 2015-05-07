@@ -15,6 +15,15 @@ from datetime import datetime
 import time
 
 
+# set default encoding
+reload(sys)  
+sys.setdefaultencoding('utf8')
+
+# logging conf
+logging.basicConfig(filename="build.log", level=logging.DEBUG, 
+                    format="%(asctime)s %(message)s", 
+                    datefmt="%m/%d/%Y %I:%M:%S %p")
+
 # dbase part global
 con = MySQLdb.connect(host="localhost", user="root", passwd="vertigo")
 cur = con.cursor()
@@ -24,7 +33,7 @@ cur.execute("USE book")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
 
-lim = 5  # num of pdf generated
+lim = 100  # num of pdf generated
 results = [i for i in results if i[3]][:lim]
 
 domain = sys.argv[1]
@@ -64,18 +73,14 @@ env = Environment(
 # custom filter for latex
 env.filters['escape_tex'] = escape_tex
 
+
 # ready to render
 def render_template(template_filename, context):
     return env.get_template(template_filename).render(context)
 
+
 # randomize template
 template_collection = ["book1.tex"]
-
-# list out of index exception helper
-class MyList(list):
-    """return value at index, else None"""
-    def get(self, index, default=""):
-        return self[index] if len(self) > index else default
 
 
 def spin(content):
@@ -154,7 +159,6 @@ def create_tex(template, title, author, relatedtitle):
         related_text_raw = f.read()
         relatedtext = spin(related_text_raw) % (title, author, rand_date, title)
 
-    l = MyList(relatedtitle)  # instantiate the class
 
     # construct the string
     container = ""
@@ -172,7 +176,7 @@ def create_tex(template, title, author, relatedtitle):
         "title": title,
         "colors": colors,
         "image": image,
-        "author": author,
+        "author": unicode(author, errors="replace"),
         "uid": uid,
         "vote": vote,
         "pretitle": pretitle,
@@ -230,6 +234,7 @@ if __name__ == "__main__":
             related_results = [i[0] for i in related_results]  # list of string with length of max. 8
             # generate the tex file
             authors = [i[2] for i in results]
+
             create_tex(choosen_template, title, authors[count-1], related_results)
             # download the image
             url = [i[3] for i in results][count-1]
@@ -239,7 +244,7 @@ if __name__ == "__main__":
             # generate the pdf file
             subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
             # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-            #               stdout=FNULL, stderr=subprocess.STDOUT)
+            #                 stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
             fname = "%s.pdf" % unicode(title.title().replace(" ", "-"))
