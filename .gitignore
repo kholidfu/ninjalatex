@@ -7,7 +7,6 @@ assets*/
 *.aux
 *.log
 *.out
-*.png
 *.pdf
 output.tex
 setem.txt
