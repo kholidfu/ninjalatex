@@ -24,8 +24,6 @@ cur.execute("USE book")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
 
-
-
 lim = 5  # num of pdf generated
 results = [i for i in results if i[3]][:lim]
 
@@ -125,7 +123,9 @@ def create_tex(template, title, author, relatedtitle):
     built a tex file using database and spinned content (*.txt)
     """
     # define data needed
-    uid = hashlib.md5(title).hexdigest().upper()
+    uid = hashlib.md5(title).hexdigest().upper()[:15]
+    pretitle = title.upper()[:2]
+    vote = random.randint(2, 40)
     colors = ",".join([str(random.random())[:4] for i in range(4)])
     image = "thumb.jpg"
     # spinned content goes here
@@ -174,6 +174,8 @@ def create_tex(template, title, author, relatedtitle):
         "image": image,
         "author": author,
         "uid": uid,
+        "vote": vote,
+        "pretitle": pretitle,
         "tex11": tex11,
         "tex12": tex12,
         "tex13": tex13,
