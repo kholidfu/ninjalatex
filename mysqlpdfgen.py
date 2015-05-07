@@ -9,6 +9,10 @@ import random
 import re
 import logging
 import urllib2
+from random import randrange
+from datetime import timedelta
+from datetime import datetime
+import time
 
 
 # dbase part global
@@ -69,7 +73,8 @@ template_collection = ["book1.tex"]
 def spin(content):
     """takes a string like
  
-    {Hi|Hello|Good morning}, my name is Matt and I have {something {important|special} to say|a favorite book}.
+    {Hi|Hello|Good morning}, my name is Matt and 
+    I have {something {important|special} to say|a favorite book}.
  
     and randomly selects from the options in curly braces
     to produce unique strings.
@@ -93,10 +98,6 @@ def spin(content):
             raise "unbalanced brace"
         return content[:start] + random.choice(rest[:end].split('|')) + spin(rest[end+1:])
 
-
-from random import randrange
-from datetime import timedelta
-from datetime import datetime
 
 def random_date(start, end):
     """
@@ -128,12 +129,11 @@ def create_tex(template, title, author):
         tex13 = spin(tex1[2]) % (title, title)
 
     # book_related_fafifu.txt
-    
     # generate random date
     d1 = datetime.strptime('1/1/2009 4:50 AM', '%m/%d/%Y %I:%M %p')
-    d2 = datetime.strptime(datetime.now().strftime("%m/%d/%Y %I:%M %p"), '%m/%d/%Y %I:%M %p')
+    d2 = datetime.strptime(datetime.now().strftime("%m/%d/%Y %I:%M %p"), 
+                           '%m/%d/%Y %I:%M %p')
 
-    import time
     t = time.localtime()
     suffix = 'st' if t.tm_mday in [1,21,31] else 'nd' if t.tm_mday in [2, 22] else 'rd' if t.tm_mday in [3, 23] else 'th'
 
