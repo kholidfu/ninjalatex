@@ -21,3 +21,5 @@ setem.txt
 fdp.txt
 thumb.jpg
 *.pyc
+*.dvi
+*.ps
