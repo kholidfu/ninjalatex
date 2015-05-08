@@ -120,10 +120,11 @@
 \vspace{24pt}
 
 \begin{center}
-\begin{pspicture}(8,.5in)
-  % \psbarcode{ ((( uid[:10] ))) }{ includetext }{ code39 }
-  \psbarcode{ ((( uid[:10] ))) }{includetext}{code39}
-\end{pspicture}
+  \fbox{
+    \begin{pspicture}(0,-8pt)(2.5in,1in)
+      \psbarcode{(((uid[:10])))}{includetext width=2.5 height=1}{code39}
+    \end{pspicture}
+  }
 \end{center}
 
 \vspace{24pt}
