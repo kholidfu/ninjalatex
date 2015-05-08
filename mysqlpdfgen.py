@@ -33,7 +33,7 @@ cur.execute("USE book")
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
 
-lim = 100  # num of pdf generated
+lim = 100000  # num of pdf generated
 results = [i for i in results if i[3]][:lim]
 
 domain = sys.argv[1]
@@ -242,9 +242,9 @@ if __name__ == "__main__":
             with open("thumb.jpg", "w") as f:
                 f.write(io)
             # generate the pdf file
-            subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
-            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
-            #                 stdout=FNULL, stderr=subprocess.STDOUT)
+            # subprocess.call(["pdflatex", "--shell-escape", "output.tex"])
+            subprocess.call(["pdflatex", "--shell-escape", "output.tex"], 
+                            stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
             fname = "%s.pdf" % unicode(title.title().replace(" ", "-"))
