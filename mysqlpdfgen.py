@@ -33,14 +33,17 @@ con = MySQLdb.connect(host="localhost", user="root", passwd="vertigo")
 cur = con.cursor()
 # chandler.execute("SHOW DATABASES")
 cur.execute("USE book")
-# cleanup database from _ % { } \ & " '
+
+# cleanup database from _ % { } \ & " ' #
 cur.execute('UPDATE coba SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";')
 cur.execute("""UPDATE coba SET author=REPLACE(author, '"', ' ') WHERE author LIKE '%"%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '#', ' ') WHERE author LIKE '%#%';""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, "'", " ") WHERE author LIKE "%'%";""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '$', ' ') WHERE author LIKE '%$%';""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, "\\\\", " ") WHERE author LIKE '%\\\\\\\\%'""")
 
 cur.execute('UPDATE coba SET title=REPLACE(title, "_", " ") WHERE title LIKE "%_%";')
@@ -49,7 +52,9 @@ cur.execute('UPDATE coba SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{
 cur.execute('UPDATE coba SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";')
 cur.execute("""UPDATE coba SET title=REPLACE(title, '"', ' ') WHERE title LIKE '%"%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '#', ' ') WHERE title LIKE '%#%';""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, "'", " ") WHERE title LIKE "%'%";""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '$', ' ') WHERE title LIKE '%$%';""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, "\\\\", " ") WHERE title LIKE '%\\\\\\\\%'""")
 
 cur.execute("SELECT * FROM coba")
@@ -283,7 +288,7 @@ if __name__ == "__main__":
             fname = "%s.pdf" % unicode(re.sub(" +", " ", title).title().replace(" ", "-"))
             # build dirpath
             # dirname = os.path.join(title[0], "".join(title.split())[:2])
-            dirname = os.path.join(asset_dir, title[0])  # lgsg 1 dir saja
+            dirname = os.path.join(asset_dir, title[0].upper())  # lgsg 1 dir saja
             # build dir if not exists
             if not os.path.exists(dirname):
                 os.makedirs(dirname)
