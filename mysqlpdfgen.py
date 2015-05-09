@@ -33,12 +33,14 @@ con = MySQLdb.connect(host="localhost", user="root", passwd="vertigo")
 cur = con.cursor()
 # chandler.execute("SHOW DATABASES")
 cur.execute("USE book")
-# cleanup database from _ % { } \ &
+# cleanup database from _ % { } \ & " '
 cur.execute('UPDATE coba SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";')
+cur.execute("""UPDATE coba SET author=REPLACE(author, '"', ' ') WHERE author LIKE '%"%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, "'", " ") WHERE author LIKE "%'%";""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, "\\\\", " ") WHERE author LIKE '%\\\\\\\\%'""")
 
 cur.execute('UPDATE coba SET title=REPLACE(title, "_", " ") WHERE title LIKE "%_%";')
@@ -46,6 +48,8 @@ cur.execute('UPDATE coba SET title=REPLACE(title, "%", " ") WHERE title LIKE "%\
 cur.execute('UPDATE coba SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";')
+cur.execute("""UPDATE coba SET title=REPLACE(title, '"', ' ') WHERE title LIKE '%"%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, "'", " ") WHERE title LIKE "%'%";""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, "\\\\", " ") WHERE title LIKE '%\\\\\\\\%'""")
 
 cur.execute("SELECT * FROM coba")
