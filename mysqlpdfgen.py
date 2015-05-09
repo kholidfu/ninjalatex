@@ -16,7 +16,6 @@ import time
 
 
 # TODO
-# remove &
 
 # set default encoding
 reload(sys)  
@@ -171,25 +170,24 @@ def create_tex(template, title, author, relatedtitle):
         tex13 = spin(tex1[2]) % (title, title)
 
     # book_related_fafifu.txt
-    # generate random date
-    d1 = datetime.strptime('1/1/2009 4:50 AM', '%m/%d/%Y %I:%M %p')
-    d2 = datetime.strptime(datetime.now().strftime("%m/%d/%Y %I:%M %p"), 
-                           '%m/%d/%Y %I:%M %p')
-
-    t = time.localtime()
-    suffix = 'st' if t.tm_mday in [1,21,31] else 'nd' if t.tm_mday in [2, 22] else 'rd' if t.tm_mday in [3, 23] else 'th'
-
-    rand_date = random_date(d1, d2).strftime('%d%%s of %B %Y %I:%M:%S %p') % suffix
 
     # ini variable ngambil dari related search di mysql lho ya
     with open("book_related_fafifu.txt") as f:
         related_text_raw = f.read()
-        relatedtext = spin(related_text_raw) % (title, author, rand_date, title)
-
+        # relatedtext = spin(related_text_raw) % (title, author, rand_date, title)
 
     # construct the string
     container = ""
     for i in relatedtitle:
+        # generate random date
+        d1 = datetime.strptime('1/1/2009 4:50 AM', '%m/%d/%Y %I:%M %p')
+        d2 = datetime.strptime(datetime.now().strftime("%m/%d/%Y %I:%M %p"), 
+                               '%m/%d/%Y %I:%M %p')
+
+        t = time.localtime()
+        suffix = 'st' if t.tm_mday in [1,21,31] else 'nd' if t.tm_mday in [2, 22] else 'rd' if t.tm_mday in [3, 23] else 'th'
+        rand_date = random_date(d1, d2).strftime('%d%%s of %B %Y %I:%M:%S %p') % suffix
+
         container += "\\noindent\\textbf{\\href{http://%s/download/%s.pdf}{%s}}" % (sys.argv[1], i.replace(" ", "-"), i.upper())
         container += "\n\n"
         container += "\\noindent " + spin(related_text_raw % (i, author, rand_date, i))
