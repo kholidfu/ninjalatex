@@ -15,6 +15,9 @@ from datetime import datetime
 import time
 
 
+# TODO
+# remove &
+
 # set default encoding
 reload(sys)  
 sys.setdefaultencoding('utf8')
@@ -30,23 +33,25 @@ con = MySQLdb.connect(host="localhost", user="root", passwd="vertigo")
 cur = con.cursor()
 # chandler.execute("SHOW DATABASES")
 cur.execute("USE book")
-# cleanup database from _ % { } \
+# cleanup database from _ % { } \ &
 cur.execute('UPDATE coba SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";')
+cur.execute('UPDATE coba SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";')
 cur.execute("""UPDATE coba SET author=REPLACE(author, "\\\\", " ") WHERE author LIKE '%\\\\\\\\%'""")
 
 cur.execute('UPDATE coba SET title=REPLACE(title, "_", " ") WHERE title LIKE "%_%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "%", " ") WHERE title LIKE "%\%%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";')
+cur.execute('UPDATE coba SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";')
 cur.execute("""UPDATE coba SET title=REPLACE(title, "\\\\", " ") WHERE title LIKE '%\\\\\\\\%'""")
 
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
 
-lim = 5  # num of pdf generated
+lim = 100000  # num of pdf generated
 results = [i for i in results if i[3]][:lim]
 
 domain = sys.argv[1]
@@ -241,7 +246,7 @@ if __name__ == "__main__":
             # choose randomed template
             choosen_template = random.choice(template_collection)
             # get related data
-            query = "SELECT title FROM coba WHERE MATCH (title) AGAINST ('%s' IN BOOLEAN MODE) > 0 AND status='2' LIMIT 8;" % title
+            query = "SELECT title FROM coba WHERE MATCH (title) AGAINST ('%s' IN BOOLEAN MODE) > 0 LIMIT 8;" % title
             cur.execute(query)
             related_results = cur.fetchall()  # hasilnya tuple of string length 8
             related_results = [i[0] for i in related_results]  # list of string with length of max. 8
@@ -251,7 +256,18 @@ if __name__ == "__main__":
             create_tex(choosen_template, title, authors[count-1], related_results)
             # download the image
             url = [i[3] for i in results][count-1]
-            io = urllib2.urlopen(url).read()
+            logging.info("url: %s" % url)
+            if url:
+                try:
+                    logging.info("downloading image")
+                    io = urllib2.urlopen(url, timeout=10).read()
+                    logging.info("thum sukses")
+                except:
+                    logging.info("thumb failed downloaded")
+                    continue
+            else:
+                logging.info("image url not exist!")
+                continue
             with open("thumb.jpg", "w") as f:
                 f.write(io)
             # generate the pdf file
