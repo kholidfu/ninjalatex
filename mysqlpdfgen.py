@@ -273,9 +273,11 @@ if __name__ == "__main__":
                     logging.info("thum sukses")
                 except:
                     logging.info("thumb failed downloaded")
+                    count += 1
                     continue
             else:
                 logging.info("image url not exist!")
+                count += 1
                 continue
             with open("thumb.jpg", "w") as f:
                 f.write(io)
