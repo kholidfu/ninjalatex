@@ -299,5 +299,6 @@ if __name__ == "__main__":
             logging.info("==================================================")
         else:
             # prevent processing empty line
-            logging.warning("baris kosong bang")
+            count += 1
+            logging.warning("title is empty, so leave this!")
     FNULL.close()
