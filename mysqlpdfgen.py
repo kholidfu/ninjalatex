@@ -15,11 +15,13 @@ from datetime import datetime
 import time
 
 
-# TODO
-
 # set default encoding
 reload(sys)  
 sys.setdefaultencoding('utf8')
+
+# STATIC VAR
+LIM = 100000  # num of pdf generated
+DOMAIN = sys.argv[1]
 
 # logging conf
 logging.basicConfig(filename="build.log", level=logging.DEBUG, 
@@ -33,13 +35,21 @@ cur = con.cursor()
 # chandler.execute("SHOW DATABASES")
 cur.execute("USE book")
 
-# cleanup database from _ % { } \ & " ' #
+# cleanup database from _ % { } \ & " ' # [ ] () <> `
 cur.execute('UPDATE coba SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";')
 cur.execute('UPDATE coba SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";')
 cur.execute("""UPDATE coba SET author=REPLACE(author, '"', ' ') WHERE author LIKE '%"%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '`', ' ') WHERE author LIKE '%`%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '^', ' ') WHERE author LIKE '%^%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '(', ' ') WHERE author LIKE '%(%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, ')', ' ') WHERE author LIKE '%)%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '[', ' ') WHERE author LIKE '%[%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, ']', ' ') WHERE author LIKE '%]%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '<', ' ') WHERE author LIKE '%<%';""")
+cur.execute("""UPDATE coba SET author=REPLACE(author, '>', ' ') WHERE author LIKE '%>%';""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, '#', ' ') WHERE author LIKE '%#%';""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, "'", " ") WHERE author LIKE "%'%";""")
 cur.execute("""UPDATE coba SET author=REPLACE(author, '$', ' ') WHERE author LIKE '%$%';""")
@@ -51,6 +61,14 @@ cur.execute('UPDATE coba SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{
 cur.execute('UPDATE coba SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";')
 cur.execute('UPDATE coba SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";')
 cur.execute("""UPDATE coba SET title=REPLACE(title, '"', ' ') WHERE title LIKE '%"%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '`', ' ') WHERE title LIKE '%`%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '^', ' ') WHERE title LIKE '%^%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '(', ' ') WHERE title LIKE '%(%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, ')', ' ') WHERE title LIKE '%)%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, ']', ' ') WHERE title LIKE '%]%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '[', ' ') WHERE title LIKE '%[%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '<', ' ') WHERE title LIKE '%<%';""")
+cur.execute("""UPDATE coba SET title=REPLACE(title, '>', ' ') WHERE title LIKE '%>%';""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, '#', ' ') WHERE title LIKE '%#%';""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, "'", " ") WHERE title LIKE "%'%";""")
 cur.execute("""UPDATE coba SET title=REPLACE(title, '$', ' ') WHERE title LIKE '%$%';""")
@@ -58,11 +76,8 @@ cur.execute("""UPDATE coba SET title=REPLACE(title, "\\\\", " ") WHERE title LIK
 
 cur.execute("SELECT * FROM coba")
 results = cur.fetchall()
-
-lim = 100000  # num of pdf generated
-results = [i for i in results if i[3]][:lim]
-
-domain = sys.argv[1]
+# exclude first 2 data, since it's only keyword pancing.
+results = [i for i in results if i[3]][:LIM]
 
 # build clean slug for filename
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -208,7 +223,7 @@ def create_tex(template, title, author, relatedtitle):
         "tex11": tex11,
         "tex12": tex12,
         "tex13": tex13,
-        "domain": domain,
+        "domain": DOMAIN,
         "related": container,
     }
 
@@ -248,6 +263,11 @@ if __name__ == "__main__":
     FNULL = open(os.devnull, 'w')
     count = 1
     for title in titles:
+        # check file size, recreate if > 1000
+        fsize = os.path.getsize("build.log")
+        if fsize > 1000:
+            with open("build.log", "w") as f:
+                pass
         if title:
             logging.info("%s. generating pdf for: %s" % (count, title))
             # choose randomed template
@@ -285,7 +305,8 @@ if __name__ == "__main__":
             #                 stdout=FNULL, stderr=subprocess.STDOUT)
             # move the pdf into separate folder
             # folder path => /assets/a/aa
-            fname = "%s.pdf" % unicode(re.sub(" +", " ", title).title().replace(" ", "-"))
+            # fname = "%s.pdf" % unicode(re.sub(" +", " ", title).title().replace(" ", "-"))
+            fname = "%s.pdf" % slugify(title).title().replace("+", "")
             # build dirpath
             # dirname = os.path.join(title[0], "".join(title.split())[:2])
             dirname = os.path.join(asset_dir, title[0].upper())  # lgsg 1 dir saja
