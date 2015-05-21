@@ -1,3 +1,5 @@
+# python mysqlpdfgen.py wikimedianetwork.com books
+
 import MySQLdb
 import os
 from jinja2 import Environment, FileSystemLoader
@@ -36,45 +38,45 @@ cur = con.cursor()
 cur.execute("USE book")
 
 # cleanup database from _ % { } \ & " ' # [ ] () <> `
-cur.execute('UPDATE coba SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";')
-cur.execute('UPDATE coba SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";')
-cur.execute('UPDATE coba SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";')
-cur.execute('UPDATE coba SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";')
-cur.execute('UPDATE coba SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";')
-cur.execute("""UPDATE coba SET author=REPLACE(author, '"', ' ') WHERE author LIKE '%"%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '`', ' ') WHERE author LIKE '%`%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '^', ' ') WHERE author LIKE '%^%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '(', ' ') WHERE author LIKE '%(%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, ')', ' ') WHERE author LIKE '%)%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '[', ' ') WHERE author LIKE '%[%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, ']', ' ') WHERE author LIKE '%]%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '<', ' ') WHERE author LIKE '%<%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '>', ' ') WHERE author LIKE '%>%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '#', ' ') WHERE author LIKE '%#%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, "'", " ") WHERE author LIKE "%'%";""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, '$', ' ') WHERE author LIKE '%$%';""")
-cur.execute("""UPDATE coba SET author=REPLACE(author, "\\\\", " ") WHERE author LIKE '%\\\\\\\\%'""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "_", " ") WHERE author LIKE "%_%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "%", " ") WHERE author LIKE "%\%%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "{", " ") WHERE author LIKE "%{%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "}", " ") WHERE author LIKE "%}%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "&", " ") WHERE author LIKE "%\&%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '"', ' ') WHERE author LIKE '%"%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '`', ' ') WHERE author LIKE '%`%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '^', ' ') WHERE author LIKE '%^%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '(', ' ') WHERE author LIKE '%(%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, ')', ' ') WHERE author LIKE '%)%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '[', ' ') WHERE author LIKE '%[%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, ']', ' ') WHERE author LIKE '%]%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '<', ' ') WHERE author LIKE '%<%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '>', ' ') WHERE author LIKE '%>%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '#', ' ') WHERE author LIKE '%#%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "'", " ") WHERE author LIKE "%'%";""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, '$', ' ') WHERE author LIKE '%$%';""")
+cur.execute("""UPDATE thestranger SET author=REPLACE(author, "\\\\", " ") WHERE author LIKE '%\\\\\\\\%'""")
 
-cur.execute('UPDATE coba SET title=REPLACE(title, "_", " ") WHERE title LIKE "%_%";')
-cur.execute('UPDATE coba SET title=REPLACE(title, "%", " ") WHERE title LIKE "%\%%";')
-cur.execute('UPDATE coba SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{%";')
-cur.execute('UPDATE coba SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";')
-cur.execute('UPDATE coba SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";')
-cur.execute("""UPDATE coba SET title=REPLACE(title, '"', ' ') WHERE title LIKE '%"%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '`', ' ') WHERE title LIKE '%`%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '^', ' ') WHERE title LIKE '%^%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '(', ' ') WHERE title LIKE '%(%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, ')', ' ') WHERE title LIKE '%)%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, ']', ' ') WHERE title LIKE '%]%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '[', ' ') WHERE title LIKE '%[%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '<', ' ') WHERE title LIKE '%<%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '>', ' ') WHERE title LIKE '%>%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '#', ' ') WHERE title LIKE '%#%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, "'", " ") WHERE title LIKE "%'%";""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, '$', ' ') WHERE title LIKE '%$%';""")
-cur.execute("""UPDATE coba SET title=REPLACE(title, "\\\\", " ") WHERE title LIKE '%\\\\\\\\%'""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "_", " ") WHERE title LIKE "%_%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "%", " ") WHERE title LIKE "%\%%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "{", " ") WHERE title LIKE "%{%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "}", " ") WHERE title LIKE "%}%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "&", " ") WHERE title LIKE "%&%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '"', ' ') WHERE title LIKE '%"%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '`', ' ') WHERE title LIKE '%`%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '^', ' ') WHERE title LIKE '%^%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '(', ' ') WHERE title LIKE '%(%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, ')', ' ') WHERE title LIKE '%)%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, ']', ' ') WHERE title LIKE '%]%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '[', ' ') WHERE title LIKE '%[%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '<', ' ') WHERE title LIKE '%<%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '>', ' ') WHERE title LIKE '%>%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '#', ' ') WHERE title LIKE '%#%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "'", " ") WHERE title LIKE "%'%";""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, '$', ' ') WHERE title LIKE '%$%';""")
+cur.execute("""UPDATE thestranger SET title=REPLACE(title, "\\\\", " ") WHERE title LIKE '%\\\\\\\\%'""")
 
-cur.execute("SELECT * FROM coba")
+cur.execute("SELECT * FROM thestranger")
 results = cur.fetchall()
 # exclude first 2 data, since it's only keyword pancing.
 results = [i for i in results if i[3]][:LIM]
@@ -176,7 +178,7 @@ def create_tex(template, title, author, relatedtitle):
     image = "thumb.jpg"
     # spinned content goes here
     # book_fafifu.txt
-    with open("book_fafifu.txt") as f:
+    with open("book_fafifu2.txt") as f:
         tex1 = f.read()
         tex1 = tex1.split("\n\n")
         random.shuffle(tex1)
@@ -273,7 +275,7 @@ if __name__ == "__main__":
             # choose randomed template
             choosen_template = random.choice(template_collection)
             # get related data
-            query = "SELECT title FROM coba WHERE MATCH (title) AGAINST ('%s' IN BOOLEAN MODE) > 0 LIMIT 8;" % title
+            query = "SELECT title FROM thestranger WHERE MATCH (title) AGAINST ('%s' IN BOOLEAN MODE) > 0 LIMIT 8;" % title
             cur.execute(query)
             related_results = cur.fetchall()  # hasilnya tuple of string length 8
             related_results = [i[0] for i in related_results]  # list of string with length of max. 8

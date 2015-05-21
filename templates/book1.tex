@@ -41,7 +41,7 @@
 
 % custom paper size
 %\usepackage[paperheight=233mm, paperwidth=178mm, top=1in,bottom=1in,right=1in,left=1in]{geometry}
-\usepackage[a4paper,right=1in]{geometry}
+\usepackage[a4paper,right=1in,bottom=1in]{geometry}
 
 % custom header footer layout settings
 \usepackage{fancyhdr}
@@ -117,7 +117,12 @@
 
 (((tex13|safe)))
 
-\vspace{24pt}
+\vspace{16pt}
+
+\begin{center}
+  \includegraphics[width=0.02\textwidth]{download.png}
+  \href{http://(((domain)))/download/(((title|replace(' ', '-')))).pdf}{(((title))) PDF eBook}
+\end{center}
 
 \begin{center}
   \fbox{
@@ -125,13 +130,6 @@
       \psbarcode{(((uid[:10])))}{includetext width=2.5 height=1}{code39}
     \end{pspicture}
   }
-\end{center}
-
-\vspace{24pt}
-
-\begin{center}
-  \includegraphics[width=0.02\textwidth]{download.png}
-  \href{http://(((domain)))/download/(((title|replace(' ', '-')))).pdf}{(((title))) PDF eBook}
 \end{center}
 
 \clearpage
